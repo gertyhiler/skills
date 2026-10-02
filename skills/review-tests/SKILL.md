@@ -1,5 +1,5 @@
 ---
-name: review-test-quality
+name: review-tests
 description: Review whether tests protect meaningful behavior at the right level and whether their results support the claimed confidence. Use for test diffs, mock-heavy suites, browser discovery and visual evidence; do not edit tests during review.
 ---
 

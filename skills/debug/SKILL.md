@@ -1,5 +1,5 @@
 ---
-name: runtime-trace-debug
+name: debug
 description: Run an interactive, project-native debug session with a temporary trace route or companion server, mechanically removable trace calls, reproduction pauses, hypothesis testing, fixes, user confirmation and cleanup. Use when debugging requires observing actual runtime state and sequence.
 ---
 

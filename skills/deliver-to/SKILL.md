@@ -1,9 +1,13 @@
 ---
-name: environment-delivery
+name: deliver-to
 description: Deliver a branch or selected commits to a non-production environment using merge or scoped cherry-pick, required preflight checks, push, and deployment tracking. Use when asked to update a development, test, or staging environment while preserving its existing changes.
 ---
 
 # Deliver to a non-production environment
+
+Use `$deliver-to stage` (or another project-defined environment) to name the
+target. Resolve that name through the project runbook; it is not automatically a
+Git branch or deployment command.
 
 ## Resolve the project contract
 

@@ -1,5 +1,5 @@
 ---
-name: review-delivery-readiness
+name: review-delivery
 description: Review evidence for delivery, deployment, migration or external runtime readiness. Use when checking whether a claimed delivery is supported by the exact revision, checks, target and runtime evidence; does not deliver or close work.
 ---
 
@@ -7,7 +7,7 @@ description: Review evidence for delivery, deployment, migration or external run
 
 Stay read-only. Review the requested delivery claim against the consumer project's
 runbook and the supplied artifacts. Do not dispatch another reviewer or require
-another skill. Unlike release-readiness, this is an evidence review rather than
+another skill. Unlike check-release, this is an evidence review rather than
 a procedure for assembling and validating a release integration candidate.
 
 1. Identify the exact claim: implemented, verified, published, deployed, migrated

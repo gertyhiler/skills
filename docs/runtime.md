@@ -9,7 +9,7 @@ installation convenience, not a runtime requirement; copying a skill folder work
 ## Generated project instrumentation
 
 The Python rule applies to executable helpers shipped in this repository.
-`runtime-trace-debug` generates temporary collectors and trace calls in the
+`debug` generates temporary collectors and trace calls in the
 consumer project's own stack (for example TypeScript or Go). Those adapters use
 the project's runtime and are removed after the debug session. They are not
 additional runtimes required to install this skill collection.

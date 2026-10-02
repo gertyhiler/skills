@@ -1,6 +1,6 @@
 ---
-name: release-readiness
-description: Assess production release go/no-go for a branch or merge request by verifying its integration candidate against the current target and preserving intended changes. Use for release readiness, delivery into the release target, or explicit $release-readiness requests. Does not merge or deploy.
+name: check-release
+description: Assess production release go/no-go for a branch or merge request by verifying its integration candidate against the current target and preserving intended changes. Use for release readiness, delivery into the release target, or explicit $check-release requests. Does not merge or deploy.
 ---
 
 # Release readiness: verify the integration candidate

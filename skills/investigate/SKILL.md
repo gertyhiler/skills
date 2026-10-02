@@ -1,5 +1,5 @@
 ---
-name: investigate-runtime
+name: investigate
 description: Investigate runtime incidents by correlating code paths, logs, metrics and database state. Use for unexplained failures, retries, state discrepancies or integration behavior; distinguish facts, hypotheses and missing evidence before recommending a fix.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: organize-module-code
+name: organize-code
 description: Place files by ownership, distinguish UI primitives from composed components and organize mixed model/helper/lib folders. Use for module-structure changes and reuse decisions; follow the project's architecture rather than imposing FSD.
 ---
 

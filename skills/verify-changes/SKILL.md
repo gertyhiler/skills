@@ -35,7 +35,7 @@ instructions as permission to skip required checks.
    behavior, failures, explicit requests, or unresolved risk. Resolve executable
    commands from the documented source, such as package scripts or build targets.
    Do not assume a command named `verify` includes a production build. A required
-   delivery preflight is a separate obligation handled by environment-delivery.
+   delivery preflight is a separate obligation handled by deliver-to.
 4. Before a heavy local build, resolve applicable project/machine resource policy
    and enforce its limits on the actual build workers. If required enforcement is
    unavailable, stop that build and report the blocker. Apply limits and concurrency

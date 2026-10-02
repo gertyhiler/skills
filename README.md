@@ -17,17 +17,17 @@ Installing a skill never grants permission to deploy or discard work.
 | Skill | When it helps |
 | --- | --- |
 | [verify-changes](skills/verify-changes/SKILL.md) | Choose proportionate checks and tie evidence to the actual diff or candidate. |
-| [environment-delivery](skills/environment-delivery/SKILL.md) | Deliver into a named non-production environment without overwriting its history. |
-| [release-readiness](skills/release-readiness/SKILL.md) | Assess the actual integration candidate; distinguish readiness from deployment. |
-| [worktree-cleanup](skills/worktree-cleanup/SKILL.md) | Inventory completed worktrees and preserve unique history and local files. |
-| [runtime-trace-debug](skills/runtime-trace-debug/SKILL.md) | Run a project-native debug session with a temporary collector, reproduction pauses, confirmation and marked cleanup. |
-| [design-project-tests](skills/design-project-tests/SKILL.md) | Choose tests that protect observable behavior at the right level. |
-| [review-test-quality](skills/review-test-quality/SKILL.md) | Review the confidence a test suite actually provides, without editing it. |
-| [organize-module-code](skills/organize-module-code/SKILL.md) | Place code by ownership and keep primitives, compositions and internal modules distinct. |
-| [review-delivery-readiness](skills/review-delivery-readiness/SKILL.md) | Review evidence behind a delivery or runtime-readiness claim. |
+| [deliver-to](skills/deliver-to/SKILL.md) | Deliver into a named non-production environment without overwriting its history. |
+| [check-release](skills/check-release/SKILL.md) | Assess the actual integration candidate; distinguish readiness from deployment. |
+| [clean-worktrees](skills/clean-worktrees/SKILL.md) | Inventory completed worktrees and preserve unique history and local files. |
+| [debug](skills/debug/SKILL.md) | Run a project-native debug session with a temporary collector, reproduction pauses, confirmation and marked cleanup. |
+| [design-tests](skills/design-tests/SKILL.md) | Choose tests that protect observable behavior at the right level. |
+| [review-tests](skills/review-tests/SKILL.md) | Review the confidence a test suite actually provides, without editing it. |
+| [organize-code](skills/organize-code/SKILL.md) | Place code by ownership and keep primitives, compositions and internal modules distinct. |
+| [review-delivery](skills/review-delivery/SKILL.md) | Review evidence behind a delivery or runtime-readiness claim. |
 | [grafana-access](skills/grafana-access/SKILL.md) | Read bounded Loki logs and Prometheus metrics through a project-local access contract. |
 | [postgresql-access](skills/postgresql-access/SKILL.md) | Read schema first, select the intended database and run bounded read-only queries. |
-| [investigate-runtime](skills/investigate-runtime/SKILL.md) | Correlate code, logs and persisted state into facts, hypotheses and next actions. |
+| [investigate](skills/investigate/SKILL.md) | Correlate code, logs and persisted state into facts, hypotheses and next actions. |
 
 See [the investigation workflow](docs/investigation-workflow.md) for how I connect
 skills with AGENTS.md, runbooks and ignored `.agents/local/.env.agents` files.
@@ -48,7 +48,7 @@ location, including any supporting files. Never silently overwrite a local skill
 with the same name. Review updates before replacing an installed copy.
 
 The procedures are independently installable; no other skill in this repository
-is required. `worktree-cleanup` retains explicit-only invocation in its Codex
+is required. `clean-worktrees` retains explicit-only invocation in its Codex
 metadata. Other agent runtimes may not enforce that metadata; its instructions
 still require a cleanup request and scoped authorization.
 
@@ -81,7 +81,7 @@ invent a branch, command or approval.
 ```text
 Verify this diff against the project's testing policy.
 Assess this branch against the current release target; do not merge it.
-Deliver these commits to the staging environment defined in our runbook.
+$deliver-to stage — deliver these commits using the project runbook.
 Investigate this intermittent bug using temporary local traces.
 Inventory completed worktrees; show what would be removed before deleting anything.
 ```

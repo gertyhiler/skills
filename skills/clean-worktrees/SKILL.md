@@ -1,5 +1,5 @@
 ---
-name: worktree-cleanup
+name: clean-worktrees
 description: Inventory and safely remove explicitly approved completed local worktrees and branches, checking dirty files and unpublished or unmerged commits first. Use when the user requests worktree cleanup; remote deletion is separate.
 ---
 

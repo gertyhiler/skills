@@ -1,5 +1,5 @@
 ---
-name: design-project-tests
+name: design-tests
 description: Choose meaningful regression coverage for a change, including unit, integration, browser and visual tests. Use when adding tests, selecting a test level, or replacing tests coupled to implementation details.
 ---
 
