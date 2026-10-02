@@ -20,7 +20,7 @@ Installing a skill never grants permission to deploy or discard work.
 | [environment-delivery](skills/environment-delivery/SKILL.md) | Deliver into a named non-production environment without overwriting its history. |
 | [release-readiness](skills/release-readiness/SKILL.md) | Assess the actual integration candidate; distinguish readiness from deployment. |
 | [worktree-cleanup](skills/worktree-cleanup/SKILL.md) | Inventory completed worktrees and preserve unique history and local files. |
-| [runtime-trace-debug](skills/runtime-trace-debug/SKILL.md) | Reproduce a runtime bug, collect scoped traces, validate the fix and clean up. |
+| [runtime-trace-debug](skills/runtime-trace-debug/SKILL.md) | Run a project-native debug session with a temporary collector, reproduction pauses, confirmation and marked cleanup. |
 | [design-project-tests](skills/design-project-tests/SKILL.md) | Choose tests that protect observable behavior at the right level. |
 | [review-test-quality](skills/review-test-quality/SKILL.md) | Review the confidence a test suite actually provides, without editing it. |
 | [organize-module-code](skills/organize-module-code/SKILL.md) | Place code by ownership and keep primitives, compositions and internal modules distinct. |

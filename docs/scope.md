@@ -7,8 +7,9 @@ for use outside their original project.
 - The verification, delivery, release and worktree procedures came from repeated
   Git/integration work. Their source version was extracted on October 1, 2026.
 - Runtime tracing was adapted from a Next.js debugging procedure. The public
-  version keeps the evidence cycle but requires a host-specific local adapter;
-  it does not pretend one route implementation works in every framework.
+  version owns an interactive session with a temporary project-native route or
+  companion server, marked emitters, reproduction/confirmation pauses and cleanup.
+  It does not pretend one route implementation works in every framework.
 - Testing and module-ownership guidance was adapted from personal procedures used
   across client projects. Mandatory dependencies on other skills, fixed viewport
   matrices, private paths and project-specific approval policies were removed.

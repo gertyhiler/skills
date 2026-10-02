@@ -14,7 +14,7 @@ request.
 | Delivery review | Claimed step, exact revision/environment, required evidence, actual command/job outcomes and deferred scope. |
 | Investigations and access | Intended environment, schema/code sources, service labels/datasources, ignored local configuration, read-only role and evidence handling. |
 | Worktrees | Allowed location, active task ownership, integration target, treatment of ignored files, available managed-worktree lifecycle. |
-| Runtime debugging | Reproduction route or entrypoint, local launch command, evidence directory, permitted instrumentation and sensitive fields. |
+| Runtime debugging | Project stack and reproduction entrypoint, collector route/server choice, launch/stop commands, session manifest/evidence directory, sensitive fields and user reproduction/confirmation steps. |
 | Tests | Valuable behaviors, test commands/frameworks, browser/visual requirements and external boundaries. |
 | Module organization | Architecture and import rules, existing public APIs, ownership and styling conventions. |
 
