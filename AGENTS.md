@@ -13,7 +13,8 @@ cleanup skill does not instruct you to deliver or delete anything here. Follow
 the user's actual task. Keep each skill independently installable. Preserve
 explicit invocation policy when adapting an existing skill.
 
-Run make check after edits. Review risky workflow changes against realistic
+Run make verify after edits. Access helpers must be tested against isolated fixtures,
+never against private environments or credentials. Review risky workflow changes against realistic
 scenarios; structural validation alone cannot establish behavioral correctness.
 No automatic multi-agent fanout, review loop, publishing or baseline acceptance.
 No application build or deployment exists in this documentation repository.

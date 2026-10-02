@@ -24,6 +24,13 @@ Installing a skill never grants permission to deploy or discard work.
 | [design-project-tests](skills/design-project-tests/SKILL.md) | Choose tests that protect observable behavior at the right level. |
 | [review-test-quality](skills/review-test-quality/SKILL.md) | Review the confidence a test suite actually provides, without editing it. |
 | [organize-module-code](skills/organize-module-code/SKILL.md) | Place code by ownership and keep primitives, compositions and internal modules distinct. |
+| [review-delivery-readiness](skills/review-delivery-readiness/SKILL.md) | Review evidence behind a delivery or runtime-readiness claim. |
+| [grafana-access](skills/grafana-access/SKILL.md) | Read bounded Loki logs and Prometheus metrics through a project-local access contract. |
+| [postgresql-access](skills/postgresql-access/SKILL.md) | Read schema first, select the intended database and run bounded read-only queries. |
+| [investigate-runtime](skills/investigate-runtime/SKILL.md) | Correlate code, logs and persisted state into facts, hypotheses and next actions. |
+
+See [the investigation workflow](docs/investigation-workflow.md) for how I connect
+skills with AGENTS.md, runbooks and ignored `.agents/local/.env.agents` files.
 
 ## Install only what you need
 
@@ -86,15 +93,20 @@ claims, each requiring its own evidence.
 
 ## Maintain
 
-Validation requires Python 3.9+, Git and Make. Dependencies stay in a local venv.
+Validation requires Python 3.9+, Node.js 22+, Git and Make. Python dependencies stay in a local venv;
+Node test dependencies stay in node_modules.
 
 ```sh
 make setup
-make check
+make verify
 ```
 
 Checks validate skill metadata, local documentation links and invocation metadata.
-They do not execute the workflows against your Git repositories or environments.
+`make test` runs isolated helper tests with fictional configuration and a local HTTP fixture.
+An additional PostgreSQL integration test runs in CI against a disposable database.
+Locally it runs only when `SKILLS_TEST_DATABASE_URL` points to a disposable test DB;
+otherwise it is reported as skipped. Never set it to a real project database.
+These tests do not execute workflows against your real environments.
 For behavioral changes, use a small representative scenario and record what was
 actually verified. Keep improvements driven by repeated work rather than growing
 a universal rulebook. See [contributing](CONTRIBUTING.md) and

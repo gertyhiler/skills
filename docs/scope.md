@@ -12,6 +12,10 @@ for use outside their original project.
 - Testing and module-ownership guidance was adapted from personal procedures used
   across client projects. Mandatory dependencies on other skills, fixed viewport
   matrices, private paths and project-specific approval policies were removed.
+- Delivery review and runtime investigation were extracted from project-specific
+  procedures. Grafana and PostgreSQL helpers preserve the original Node approach
+  while removing private service maps, paths and fixtures. The public PostgreSQL
+  adapter deliberately supports investigation reads only.
 - Upstream community skills and vendor manuals are not bundled or relabeled as
   personal work. This repository does not copy corporate templates, assets,
   credentials, client data or internal access instructions.

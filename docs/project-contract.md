@@ -11,6 +11,8 @@ request.
 | Verification | Required checks, authoritative scripts/Make targets, baseline, candidate, test conventions, applicable build limits. |
 | Environment delivery | Named target and remote, merge/cherry-pick policy, required preflight, automatic/manual deployment behavior, runtime acceptance, access procedure. |
 | Release readiness | Release target, intended merge method, required checks/review, hosting restrictions and acceptable evidence. |
+| Delivery review | Claimed step, exact revision/environment, required evidence, actual command/job outcomes and deferred scope. |
+| Investigations and access | Intended environment, schema/code sources, service labels/datasources, ignored local configuration, read-only role and evidence handling. |
 | Worktrees | Allowed location, active task ownership, integration target, treatment of ignored files, available managed-worktree lifecycle. |
 | Runtime debugging | Reproduction route or entrypoint, local launch command, evidence directory, permitted instrumentation and sensitive fields. |
 | Tests | Valuable behaviors, test commands/frameworks, browser/visual requirements and external boundaries. |
