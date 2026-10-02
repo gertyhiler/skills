@@ -54,7 +54,7 @@ The runbook defines environment identity, datasource UIDs, service labels, schem
 locations, network/tunnel setup, retention and allowed data access. It may use
 existing tools instead of these helpers. Credentials alone do not grant a broader
 investigation scope. The Grafana adapter supports password login plus optional
-ingress auth; the PostgreSQL adapter uses Node pg and read-only queries. Other
+ingress auth; the PostgreSQL adapter uses Python Psycopg and read-only queries. Other
 authentication schemes should use a project adapter rather than hidden fallbacks.
 
 ## Example question

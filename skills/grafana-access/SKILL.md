@@ -34,25 +34,24 @@ to change infrastructure. This skill only reads data (login creates a session).
 ## Commands
 
 Run from the consumer checkout. Set `skill_dir` to the actual installed directory.
-All CLIs support `--env-file PATH` to select a different documented configuration.
+All subcommands support `--env-file PATH` to select a different documented configuration.
 
 ```sh
 skill_dir=.agents/skills/grafana-access
-node "$skill_dir/scripts/grafana-env.mjs" --json
-node "$skill_dir/scripts/check-connection.mjs" --json
-node "$skill_dir/scripts/query-logs.mjs" --expr '{service_name="example-api"} |= "request-id"' --from now-1h --to now --limit 100 --json
-node "$skill_dir/scripts/query-metrics.mjs" --expr 'up' --instant --time now --json
-node "$skill_dir/scripts/inspect-metric.mjs" --metric app_events_total --from now-1h --to now --json
+uv run --locked "$skill_dir/scripts/grafana.py" config
+uv run --locked "$skill_dir/scripts/grafana.py" check
+uv run --locked "$skill_dir/scripts/grafana.py" logs --expr '{service_name="example-api"} |= "request-id"' --from now-1h --to now --limit 100 --json
+uv run --locked "$skill_dir/scripts/grafana.py" metrics --expr 'up' --instant --time now --json
+uv run --locked "$skill_dir/scripts/grafana.py" labels --metric app_events_total --from now-1h --to now --json
 ```
 
 The connectivity probe checks both Loki and Prometheus. A missing datasource makes
 that combined probe fail; the individual query for an available datasource can
-still work. Multiple datasources of one type require explicit `--loki-uid` or
-`--prometheus-uid` on the relevant query (inspect its `--help`/source for flags).
-Never silently choose the first datasource. Use `export-logs.mjs --output PATH`
+still work. Multiple datasources of one type require explicit `--datasource-uid` on the relevant query.
+Never silently choose the first datasource. Use `grafana.py logs --output PATH`
 for a new local file; include the same query/window/limit flags. Exports do not
 redact application data automatically.
 
-These Node 22+ helpers implement Grafana password login with optional ingress
+This Python 3.12+ CLI runs through uv with isolated, locked dependencies and implements Grafana password login with optional ingress
 Basic Auth. SSO-only, token-only and other access models require a documented
 project adapter; do not bypass the project's authentication scheme.

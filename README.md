@@ -93,8 +93,10 @@ claims, each requiring its own evidence.
 
 ## Maintain
 
-Validation requires Python 3.9+, Node.js 22+, Git and Make. Python dependencies stay in a local venv;
-Node test dependencies stay in node_modules.
+Maintenance and executable skills use **Python 3.12+ through uv**. No Node runtime
+or consumer application dependency is required. Git and Make are used for repository
+maintenance. See [the runtime contract](docs/runtime.md) for isolated installation,
+locked execution and migration from the earlier Node commands.
 
 ```sh
 make setup

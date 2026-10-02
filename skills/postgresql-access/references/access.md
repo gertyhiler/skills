@@ -4,9 +4,8 @@ Only the consumer checkout's `.agents/local/.env.agents` is discovered. Git's
 nearest root includes worktrees and nested repositories; outside Git use cwd.
 Pass `--env-file PATH` for another documented file. No application `.env`, parent
 checkout or inherited database credential fallback is used. Values are parsed
-without shell execution or interpolation. The `pg` module resolves from the
-consumer root; run in the package checkout or install an appropriate project
-adapter when a monorepo exposes pg only in a nested package.
+without shell execution or interpolation. The skill uses its own locked Python dependencies through uv, independent of the
+consumer's language, package manager or project environment.
 
 Copy [the example](../assets/env.agents.example) into the ignored local directory.
 Use DATABASE_URL with an explicit host, database, username and password. Legacy

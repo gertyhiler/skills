@@ -1,6 +1,6 @@
 ---
 name: postgresql-access
-description: Read PostgreSQL evidence using project-local env configuration and Node pg. Use to recover schema from code, verify the selected database and run narrow investigation queries; bundled helpers do not support mutations.
+description: Read PostgreSQL evidence using project-local env configuration and Python Psycopg. Use to recover schema from code, verify the selected database and run narrow investigation queries; bundled helpers do not support mutations.
 ---
 
 # PostgreSQL access
@@ -17,7 +17,7 @@ Do not print env files, full DSNs, passwords or raw authentication errors.
 2. Decide which evidence requires a live read. Do not dump the catalog when code
    already provides the relevant schema. Runtime-only objects or schema drift
    justify targeted catalog inspection.
-3. Resolve the selected env file and consumer `pg` dependency with probe-runner.
+3. Validate the selected env file with the config command.
    Verify connection; compare database/user metadata with the project's intended
    environment. Stop on a mismatch or failed connection, without falling back.
 4. Draft a narrow SELECT from known columns and IDs, bounded by LIMIT/time range.
@@ -32,19 +32,20 @@ Do not print env files, full DSNs, passwords or raw authentication errors.
 
 ## Commands
 
-Node 22+ and `pg` installed/resolvable from the consumer Git root are required.
-Run from that checkout; set `skill_dir` to the installed location. If `pg` is
-missing, report the prerequisite; do not silently install a dependency.
+Install uv once. Run from the consumer checkout; set `skill_dir` to the installed
+location. Python 3.12+ and pinned dependencies are resolved in an isolated uv
+environment. No application dependency or Node runtime is required. Keep the
+whole skill folder, including the script lockfile and catalog SQL.
 
 ```sh
 skill_dir=.agents/skills/postgresql-access
-node "$skill_dir/scripts/probe-runner.mjs" --json
-node "$skill_dir/scripts/check-connection.mjs" --json
-node "$skill_dir/scripts/run-query.mjs" --sql 'SELECT current_timestamp;'
-node "$skill_dir/scripts/run-query.mjs" --file .agents/local/evidence/query.sql
+uv run --locked "$skill_dir/scripts/postgres.py" config
+uv run --locked "$skill_dir/scripts/postgres.py" check
+uv run --locked "$skill_dir/scripts/postgres.py" query --sql 'SELECT current_timestamp;'
+uv run --locked "$skill_dir/scripts/postgres.py" query --file .agents/local/evidence/query.sql
 ```
 
-Each accepts `--env-file PATH`. `dump-schema.mjs --catalog` reads catalog columns
+Each accepts `--env-file PATH`. `postgres.py schema` reads catalog columns
 when necessary; it is not a DDL/backup exporter. `--output PATH` creates a new
 private file rather than overwriting existing evidence. Query output may contain
 personal data: select only required fields and redact before publication.
