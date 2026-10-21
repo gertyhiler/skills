@@ -18,6 +18,8 @@ Do not print env files, full DSNs, passwords or raw authentication errors.
    already provides the relevant schema. Runtime-only objects or schema drift
    justify targeted catalog inspection.
 3. Validate the selected env file with the config command.
+   Explicit TLS modes and `uselibpqcompat=true` migration are documented in the
+   access contract; do not rewrite credentials or silently switch runners.
    Verify connection; compare database/user metadata with the project's intended
    environment. Stop on a mismatch or failed connection, without falling back.
 4. Draft a narrow SELECT from known columns and IDs, bounded by LIMIT/time range.

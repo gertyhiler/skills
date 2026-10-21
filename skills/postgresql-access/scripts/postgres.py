@@ -25,15 +25,19 @@ def connection_config(env):
         port = url.port or 5432
         if url.scheme not in ("postgres", "postgresql") or not all((url.hostname, url.username, url.password, url.path.strip('/'))) or url.fragment:
             raise ValueError()
-        pairs = parse_qsl(url.query, strict_parsing=True)
+        pairs = parse_qsl(url.query, strict_parsing=True, keep_blank_values=True)
         params = dict(pairs)
-        if len(params) != len(pairs) or set(params) - {"sslmode", "application_name"}:
+        if len(params) != len(pairs) or set(params) - {"sslmode", "application_name", "uselibpqcompat"}:
+            raise ValueError()
+        # Node's opt-in marker selects native libpq semantics, already used by
+        # Psycopg. Strip only this exact marker; never pass it to libpq.
+        if "uselibpqcompat" in params and params["uselibpqcompat"] != "true":
             raise ValueError()
     except ValueError:
         raise AccessError("Invalid PostgreSQL URL or unsupported connection parameters.") from None
     mode = params.get("sslmode", env.get("PGSSLMODE", "verify-full"))
-    if mode not in ("verify-full", "disable"):
-        raise AccessError("Use sslmode=verify-full; disable is only for a documented local connection/tunnel.")
+    if mode not in ("verify-full", "verify-ca", "require", "disable"):
+        raise AccessError("Use sslmode=verify-full, verify-ca, require or disable explicitly; no automatic TLS fallback is supported.")
     return dict(host=url.hostname, port=port, dbname=unquote(url.path[1:]),
                 user=unquote(url.username), password=unquote(url.password),
                 sslmode=mode, connect_timeout=10,

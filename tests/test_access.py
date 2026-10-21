@@ -67,7 +67,7 @@ class Contracts(unittest.TestCase):
         url = 'postgresql://reader:secret@db.example.invalid/app'
         self.assertEqual(postgres.connection_config({'DATABASE_URL': url})['sslmode'], 'verify-full')
         self.assertEqual(postgres.connection_config({'DATABASE_URL': url+'?sslmode=disable'})['sslmode'], 'disable')
-        for suffix in ('?sslmode=require', '?password=secret', '?host=wrong', '?sslmode=disable&sslmode=verify-full'):
+        for suffix in ('?sslmode=prefer', '?password=secret', '?host=wrong', '?sslmode=disable&sslmode=verify-full'):
             with self.assertRaises(AccessError):
                 postgres.connection_config({'DATABASE_URL': url+suffix})
         self.envfile.write_text('DATABASE_URL='+url+'\n')
@@ -75,6 +75,41 @@ class Contracts(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertNotIn('secret', result.stdout+result.stderr)
         self.assertNotIn('reader', result.stdout)
+
+    def test_pg_explicit_tls_modes_and_node_libpq_marker(self):
+        url = 'postgresql://reader:secret@db.example.invalid/app'
+        for mode in ('require', 'verify-ca', 'verify-full', 'disable'):
+            with self.subTest(mode=mode):
+                config = postgres.connection_config({
+                    'DATABASE_URL': url + '?uselibpqcompat=true&sslmode=' + mode,
+                    'PGSSLMODE': 'disable',
+                })
+                self.assertEqual(config['sslmode'], mode)
+                self.assertNotIn('uselibpqcompat', config)
+                self.assertEqual(config['connect_timeout'], 10)
+                self.assertIn('default_transaction_read_only=on', config['options'])
+                self.assertEqual(postgres.connection_config({
+                    'DATABASE_URL': url, 'PGSSLMODE': mode,
+                })['sslmode'], mode)
+        self.assertEqual(postgres.connection_config({
+            'DATABASE_URL': url + '?uselibpqcompat=true',
+        })['sslmode'], 'verify-full')
+
+    def test_pg_ambiguous_compatibility_and_overrides_rejected(self):
+        url = 'postgresql://reader:secret@db.example.invalid/app?'
+        for query in ('uselibpqcompat=false', 'uselibpqcompat=', 'uselibpqcompat=1',
+                      'uselibpqcompat=true&uselibpqcompat=true',
+                      'uselibpqcompat=true&sslmode=require&host=other',
+                      'uselibpqcompat=true&options=unsafe', 'sslmode=allow'):
+            with self.subTest(query=query), self.assertRaises(AccessError):
+                postgres.connection_config({'DATABASE_URL': url + query})
+        self.envfile.write_text('DATABASE_URL=' + url +
+                                'uselibpqcompat=true&sslmode=require\n')
+        result = self.cli(POSTGRES, 'config')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout)['sslmode'], 'require')
+        self.assertNotIn('secret', result.stdout + result.stderr)
+        self.assertNotIn('reader', result.stdout + result.stderr)
 
     def test_pg_writes_rejected_before_connection(self):
         for sql in ('UPDATE example SET value=1', 'SET TRANSACTION READ WRITE', 'COMMIT', ''):

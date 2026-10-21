@@ -12,12 +12,22 @@ Use DATABASE_URL with an explicit host, database, username and password. Legacy
 DSN aliases are accepted, but DATABASE_URL takes precedence; keep one connection
 per file. Configure separate files for separate environments and select explicitly.
 
-TLS defaults to certificate verification (`verify-full`). The helper accepts only
-`verify-full` or `disable`; use disable solely for the documented local connection
-or tunnel. Private CA or other authentication requirements belong in the project's
-adapter. Never disable verification to work around an unexplained TLS error.
-The optional application_name URL parameter is supported; other URL parameters
-are rejected to avoid hidden connection overrides.
+TLS defaults to certificate and hostname verification (`verify-full`). Explicit
+`sslmode` in the URL takes precedence over `PGSSLMODE` in the selected env file.
+Supported modes are `verify-full`, `verify-ca`, `require` and `disable`, with native
+[libpq semantics](https://www.postgresql.org/docs/current/libpq-ssl.html).
+`require` requires encryption but does not generally verify the server identity;
+`disable` is for a documented local connection or tunnel. Preserve the consumer's
+explicit mode; never retry with weaker TLS after a connection error. Opportunistic
+`allow`/`prefer` modes are rejected. Private CA configuration still belongs in the
+project's adapter.
+
+The optional `application_name` URL parameter is supported. Node connection URLs
+may also contain `uselibpqcompat=true`: it is accepted and removed because Psycopg
+already uses libpq. Other values (including false or empty) are rejected rather
+than guessing Node-specific TLS semantics. Unknown or duplicate URL parameters
+are rejected to avoid hidden connection overrides. Credentials need not be
+rewritten when migrating a compatible Node URL to this Python helper.
 
 Use a dedicated role with only the required SELECT permissions. Read-only
 transactions and a keyword check are defense in depth, not a boundary against
