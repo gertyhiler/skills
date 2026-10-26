@@ -65,9 +65,9 @@ class Contracts(unittest.TestCase):
 
     def test_pg_tls_and_diagnostics(self):
         url = 'postgresql://reader:secret@db.example.invalid/app'
-        self.assertEqual(postgres.connection_config({'DATABASE_URL': url})['sslmode'], 'verify-full')
+        self.assertEqual(postgres.connection_config({'DATABASE_URL': url})['sslmode'], 'prefer')
         self.assertEqual(postgres.connection_config({'DATABASE_URL': url+'?sslmode=disable'})['sslmode'], 'disable')
-        for suffix in ('?sslmode=prefer', '?password=secret', '?host=wrong', '?sslmode=disable&sslmode=verify-full'):
+        for suffix in ('?sslmode=bogus', '?password=secret', '?host=wrong', '?sslmode=disable&sslmode=verify-full'):
             with self.assertRaises(AccessError):
                 postgres.connection_config({'DATABASE_URL': url+suffix})
         self.envfile.write_text('DATABASE_URL='+url+'\n')
@@ -78,7 +78,7 @@ class Contracts(unittest.TestCase):
 
     def test_pg_explicit_tls_modes_and_node_libpq_marker(self):
         url = 'postgresql://reader:secret@db.example.invalid/app'
-        for mode in ('require', 'verify-ca', 'verify-full', 'disable'):
+        for mode in ('require', 'verify-ca', 'verify-full', 'disable', 'prefer', 'allow'):
             with self.subTest(mode=mode):
                 config = postgres.connection_config({
                     'DATABASE_URL': url + '?uselibpqcompat=true&sslmode=' + mode,
@@ -93,14 +93,14 @@ class Contracts(unittest.TestCase):
                 })['sslmode'], mode)
         self.assertEqual(postgres.connection_config({
             'DATABASE_URL': url + '?uselibpqcompat=true',
-        })['sslmode'], 'verify-full')
+        })['sslmode'], 'prefer')
 
     def test_pg_ambiguous_compatibility_and_overrides_rejected(self):
         url = 'postgresql://reader:secret@db.example.invalid/app?'
         for query in ('uselibpqcompat=false', 'uselibpqcompat=', 'uselibpqcompat=1',
                       'uselibpqcompat=true&uselibpqcompat=true',
                       'uselibpqcompat=true&sslmode=require&host=other',
-                      'uselibpqcompat=true&options=unsafe', 'sslmode=allow'):
+                      'uselibpqcompat=true&options=unsafe', 'sslmode=invalid'):
             with self.subTest(query=query), self.assertRaises(AccessError):
                 postgres.connection_config({'DATABASE_URL': url + query})
         self.envfile.write_text('DATABASE_URL=' + url +
@@ -257,7 +257,7 @@ class Contracts(unittest.TestCase):
         self.assertIn('read-only', str(error.exception))
         with self.assertRaises(Exception) as error:
             postgres.read_query(config, 'SELECT 1; SELECT 2')
-        self.assertIn('multiple commands', str(error.exception))
+        self.assertIn('SQLSTATE=42601', str(error.exception))
         for args in [('query','--sql','SELECT 42 AS answer'), ('check',), ('schema',), ('query','--sql','SELECT 1','--explain')]:
             result=self.cli(POSTGRES,*args)
             self.assertEqual(result.returncode,0,result.stderr)

@@ -1,6 +1,6 @@
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
-.PHONY: help setup check verify test build dev stop doctor clean
+.PHONY: help setup check verify test test-integration build dev stop doctor clean
 help: ## Show commands
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z_-]+:.*## / {printf "  %-12s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 doctor: ## Check uv and Git without installation
@@ -21,3 +21,6 @@ stop: ## No managed background process
 	@printf 'No background processes are managed.\n'
 clean: ## No repository artifact deletion
 	@printf 'No generated artifacts are managed. Local .venv and .agents/work are preserved.\n'
+
+test-integration: ## Test disposable PostgreSQL with TLS, CA and compatibility cases (Docker/openssl)
+	uv run --locked python scripts/test_postgres_integration.py

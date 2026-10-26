@@ -111,9 +111,11 @@ make verify
 
 Checks validate skill metadata, local documentation links and invocation metadata.
 `make test` runs isolated helper tests with fictional configuration and a local HTTP fixture.
-An additional PostgreSQL integration test runs in CI against a disposable database.
-Locally it runs only when `SKILLS_TEST_DATABASE_URL` points to a disposable test DB;
-otherwise it is reported as skipped. Never set it to a real project database.
+CI also runs `make test-integration`: disposable Docker PostgreSQL servers with
+and without TLS, certificate verification, schema selection and read-only checks.
+Run that target locally with Docker and openssl; it owns and removes its containers
+and fictional configuration. Ordinary `make test` skips live DB tests unless the
+fixture variables are set. Never point them at a real project database.
 These tests do not execute workflows against your real environments.
 For behavioral changes, use a small representative scenario and record what was
 actually verified. Keep improvements driven by repeated work rather than growing

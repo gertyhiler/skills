@@ -43,17 +43,19 @@ Environment parsing does not execute shell text or expand variables.
 The small access_common.py module is vendored into each skill to avoid cross-skill
 imports. Tests check they remain equal. Do not create a shared package dependency
 just to install one skill. HTTP uses verified TLS, a total per-request deadline including response body and
-no automatic redirects or ambient proxy settings. PostgreSQL uses verified TLS by
-default, a 10-second connection timeout, 15-second server statement timeout and 20-second
-client query timeout.
+no automatic redirects or ambient proxy settings. PostgreSQL defaults to
+opportunistic TLS (`prefer`), with explicit verified modes supported. Connection
+timeout defaults to 10 seconds (configurable 1–60); server statements are bounded
+to 15 seconds and client queries to 20 seconds.
 Read-only transactions and one-statement execution remain mandatory. Raw service
 errors are suppressed; returned evidence can still contain sensitive application data.
 
 ## Repository maintenance
 
 make setup runs uv sync --locked. make verify runs the structural validator and
-Python unittest contracts. CI includes a disposable PostgreSQL fixture; local
-integration requires SKILLS_TEST_DATABASE_URL pointing only to a disposable DB.
+Python unittest contracts. CI also runs make test-integration, which uses Docker
+and openssl to provision and remove disposable TLS/non-TLS PostgreSQL fixtures.
+The same target runs locally with fictional credentials; no real env file is read.
 Repository dependencies are locked in uv.lock; script dependencies are locked per
 CLI for independent installation. When updating a dependency, update both relevant
 metadata and locks, then verify the isolated copied skill as well as the repository.

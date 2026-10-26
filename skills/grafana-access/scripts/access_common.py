@@ -12,7 +12,7 @@ class AccessError(Exception):
 class PolicyError(AccessError):
     pass
 
-def load_env(explicit=None, cwd=None):
+def load_env(explicit=None, cwd=None, *, with_path=False):
     cwd = Path(cwd or Path.cwd()).resolve()
     result = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=cwd,
                             capture_output=True, text=True, timeout=10)
@@ -23,7 +23,8 @@ def load_env(explicit=None, cwd=None):
     except OSError:
         raise AccessError("Cannot read agent env file; configure .agents/local/.env.agents or pass --env-file.") from None
     values = dotenv_values(stream=StringIO(raw), interpolate=False)
-    return {k: v for k, v in values.items() if v is not None}
+    parsed = {k: v for k, v in values.items() if v is not None}
+    return (parsed, target) if with_path else parsed
 
 def positive(value):
     import argparse

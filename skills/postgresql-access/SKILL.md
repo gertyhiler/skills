@@ -21,7 +21,9 @@ Do not print env files, full DSNs, passwords or raw authentication errors.
    Explicit TLS modes and `uselibpqcompat=true` migration are documented in the
    access contract; do not rewrite credentials or silently switch runners.
    Verify connection; compare database/user metadata with the project's intended
-   environment. Stop on a mismatch or failed connection, without falling back.
+   environment. Stop on an environment mismatch. Use the safe error category to distinguish a
+   configuration, TLS, network, authentication or SQL problem; do not switch env
+   files/runners or weaken an explicitly requested TLS mode.
 4. Draft a narrow SELECT from known columns and IDs, bounded by LIMIT/time range.
    Inspect suspiciously expensive reads with plain EXPLAIN, not EXPLAIN ANALYZE.
    Avoid invoking unfamiliar functions: even SELECT can trigger side effects.
@@ -47,7 +49,11 @@ uv run --locked "$skill_dir/scripts/postgres.py" query --sql 'SELECT current_tim
 uv run --locked "$skill_dir/scripts/postgres.py" query --file .agents/local/evidence/query.sql
 ```
 
-Each accepts `--env-file PATH`. `postgres.py schema` reads catalog columns
+Each accepts `--env-file PATH`; URL/PG* fields and Prisma `schema` are supported.
+The env file is sufficient for supported connection and certificate settings.
+Without an explicit TLS mode, libpq `prefer` permits non-TLS servers; use explicit
+`verify-full` and CA settings when authenticated TLS is required. `check` reports
+the actual TLS and read-only state. `postgres.py schema` reads catalog columns
 when necessary; it is not a DDL/backup exporter. `--output PATH` creates a new
 private file rather than overwriting existing evidence. Query output may contain
 personal data: select only required fields and redact before publication.
