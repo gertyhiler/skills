@@ -1,42 +1,7 @@
 # Project contract
 
-Skills reuse a procedure; the consumer repository owns the operating details.
-Read applicable AGENTS.md files, follow their document links and compare them
-with the current repository configuration. Explicit user instructions can provide
-missing details. A document is not permission to take an action the user did not
-request.
-
-| Procedure | Project inputs |
-| --- | --- |
-| Verification | Required checks, authoritative scripts/Make targets, baseline, candidate, test conventions, applicable build limits. |
-| Environment delivery | Named target and remote, merge/cherry-pick policy, required preflight, automatic/manual deployment behavior, runtime acceptance, access procedure. |
-| Release readiness | Release target, intended merge method, required checks/review, hosting restrictions and acceptable evidence. |
-| Delivery review | Claimed step, exact revision/environment, required evidence, actual command/job outcomes and deferred scope. |
-| Investigations and access | Intended environment, schema/code sources, service labels/datasources, ignored local configuration, read-only role and evidence handling. |
-| Worktrees | Allowed location, active task ownership, integration target, treatment of ignored files, available managed-worktree lifecycle. |
-| Runtime debugging | Project stack and reproduction entrypoint, collector route/server choice, launch/stop commands, session manifest/evidence directory, sensitive fields and user reproduction/confirmation steps. |
-| Tests | Valuable behaviors, test commands/frameworks, browser/visual requirements and external boundaries. |
-| Module organization | Architecture and import rules, existing public APIs, ownership and styling conventions. |
-
-Only resolve inputs relevant to the requested operation. A documentation check
-need not discover a staging environment. A missing deployment contract does not
-prevent reading the diff. Explain which particular step depends on a missing
-input; do not demand an entire documentation suite as a preliminary gate.
-
-If project docs conflict with code, report the concrete discrepancy. An optional
-CI job is not automatically mandatory; a green pipeline does not prove a required
-job ran. Evidence can be reused when the relevant revision, dependencies,
-configuration and environment match.
-
-## Small example
-
-A project's single runbook might state:
-
-- Verification: run make check and affected tests; application builds are separate.
-- Delivery: stage accumulates completed features; ordinary merge is permitted.
-- Deployment: a push triggers CI, but deployment requires the documented manual job.
-- Runtime: confirm the health endpoint reports the deployed revision.
-- Worktrees: preserve workspaces owned by active tasks and inspect ignored files.
-
-These are illustrative choices. The skills do not create these policies for a
-consumer, turn a check into deployment authorization, or require these branch names.
+The canonical [project contract](../skills/setup-runbooks/references/project-contract.md)
+lives inside setup-runbooks so that the skill remains independently installable.
+Read it when maintaining or configuring these skills. Consumer repositories own
+their operating details; setup-runbooks helps reconcile those details with the
+contract without imposing a fixed layout or authorizing the operations it documents.

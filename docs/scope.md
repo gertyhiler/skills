@@ -32,3 +32,11 @@ or client endorsement.
 The repository contains selected reusable procedures. It is not a replacement
 for project documentation, a task tracker, an agent daemon, or a collection of
 all prompts on my machine. Architecture choices such as FSD remain project-owned.
+
+## Runbook setup approach
+
+setup-runbooks draws on the explore/recommend/preview/confirm/update-in-place
+approach of [Matt Pocock’s setup skill](https://github.com/mattpocock/skills/tree/main/skills/engineering/setup-matt-pocock-skills).
+Its instructions and section seeds are original to this package; no upstream
+tracker/domain templates are bundled. The project contract is shipped inside the
+skill so a standalone installation contains its required references.

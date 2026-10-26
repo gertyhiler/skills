@@ -16,10 +16,11 @@ Installing a skill never grants permission to deploy or discard work.
 
 | Skill | When it helps |
 | --- | --- |
+| [setup-runbooks](skills/setup-runbooks/SKILL.md) | Configure or reconcile project runbooks: inspect, preview, confirm, then write. |
 | [verify-changes](skills/verify-changes/SKILL.md) | Choose proportionate checks and tie evidence to the actual diff or candidate. |
 | [deliver-to](skills/deliver-to/SKILL.md) | Deliver into a named non-production environment without overwriting its history. |
 | [check-release](skills/check-release/SKILL.md) | Assess the actual integration candidate; distinguish readiness from deployment. |
-| [clean-worktrees](skills/clean-worktrees/SKILL.md) | Inventory completed worktrees and preserve unique history and local files. |
+| [clean-worktrees](skills/clean-worktrees/SKILL.md) | Analyze all worktrees, present a cleanup plan in chat, then remove after confirmation. |
 | [debug](skills/debug/SKILL.md) | Run a project-native debug session with a temporary collector, reproduction pauses, confirmation and marked cleanup. |
 | [design-tests](skills/design-tests/SKILL.md) | Choose tests that protect observable behavior at the right level. |
 | [review-tests](skills/review-tests/SKILL.md) | Review the confidence a test suite actually provides, without editing it. |
@@ -53,6 +54,11 @@ metadata. Other agent runtimes may not enforce that metadata; its instructions
 still require a cleanup request and scoped authorization.
 
 ## Connect your project
+
+Use `setup-runbooks` when you want help configuring or reconciling these pointers
+and their project instructions. It inspects the repository and presents a concrete
+draft for confirmation before writing. Existing runbooks can also satisfy the
+contract directly; setup is not a prerequisite for using other skills.
 
 Add pointers to the process documents you already maintain. Paths below are
 examples, not required filenames:
