@@ -41,16 +41,38 @@ this skill.
 
 An explicit request to deliver to a named environment authorizes necessary local
 integration, required preflight, normal push, and observing deployment within that
-scope. Follow declared authorization for manual pipeline/deployment actions.
+scope. Execute the requested delivery without an additional plan-approval pause.
+Follow declared authorization for manual pipeline/deployment actions.
 Unrelated targets and source changes remain outside scope. Task-tracker mutations
 follow the project's separate workflow and authorization; deployment alone does
 not authorize closing an issue.
+
+## Worktree lifecycle
+
+Inspect refs/history/diffs without creating a checkout. Reuse an existing suitable
+checkout only when clean, free and compatible with task ownership. When separate
+files are needed for execution, create a temporary worktree at the project/machine
+permitted location; a temporary path does not replace explicit removal. Do not
+make a long-lived checkout depend on temporary dependencies or configuration.
+A reused checkout is borrowed, not disposable: preserve its original state and
+restore any temporary checkout selection after the operation without discarding
+concurrent changes. Remove only temporary worktrees created by this operation.
+
+Creating a temporary worktree includes cleaning it up in this operation, without
+a separate approval for the agent's own disposable artifacts once useful work is
+retained or reproducible. Remove it before the final report using Git worktree
+removal without force, or the runtime's supported managed-worktree lifecycle.
+Move to a surviving directory first. On failure/interruption, remove reproducible
+temporary artifacts when possible; preserve irreplaceable work and report the
+specific reason and location of any remainder. Never silently discard valuable
+files or bypass a removal refusal. No background cleanup is implied.
 
 ## Procedure
 
 1. Resolve the requested source SHA/commit range and named targets. Fetch current
    refs. Record source and target SHAs, check whether changes are already delivered,
-   and preserve dirty worktrees. Use an isolated clean target worktree.
+   and preserve dirty worktrees. Choose a suitable existing checkout or a temporary
+   target worktree only when execution needs separate files, following the lifecycle above.
 2. State source -> target topology before branch mutation. Prefer a normal merge
    when the complete source-only scope is intended. Inspect commits and diff;
    divergence alone is not an error. Use cherry-pick when only identified commits
@@ -75,7 +97,8 @@ not authorize closing an issue.
 6. Recheck the remote target before a normal push. If it advanced, integrate its
    new state and reassess candidate/preflight evidence; never overwrite concurrent
    work. Push only requested targets and verify remote SHAs. Preserve source history.
-7. Locate the pipeline for the exact pushed SHA AND target ref using the project's
+7. Waiting for CI alone does not require retaining a checkout; remove a completed
+   temporary delivery worktree once its useful work is retained. Locate the pipeline for the exact pushed SHA AND target ref using the project's
    access procedure. Observe required build/deploy jobs from that revision. For
    automatic delivery, wait for its pipeline rather than starting a duplicate.
    Execute manual steps only within declared authorization. Push, pipeline creation,

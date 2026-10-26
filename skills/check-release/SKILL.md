@@ -9,7 +9,9 @@ Assess a specific source SHA (`S`) against the current target SHA (`M`).
 The object of verification is their integration candidate, not the source branch
 alone. Record its tree ID (`T`) and the intended merge method. GO means this
 candidate is ready for delivery into the release target; it does not mean
-production is updated.
+production is updated. Execute the requested assessment and return its verdict
+without a separate plan-approval pause; missing required inputs still block their
+dependent steps.
 
 ## Scope and access
 
@@ -32,6 +34,26 @@ production is updated.
   required, use actual review and verification evidence. If the server blocks
   the chosen merge method, report the specific active rule rather than inventing
   a gate from `approved: false` or an optional job being `manual`.
+
+## Worktree lifecycle
+
+Inspect refs/history/diffs without creating a checkout. Reuse an existing suitable
+checkout only when clean, free and compatible with task ownership. When separate
+files are needed for execution, create a temporary worktree at the project/machine
+permitted location; a temporary path does not replace explicit removal. Do not
+make a long-lived checkout depend on temporary dependencies or configuration.
+A reused checkout is borrowed, not disposable: preserve its original state and
+restore any temporary checkout selection after the operation without discarding
+concurrent changes. Remove only temporary worktrees created by this operation.
+
+Creating a temporary worktree includes cleaning it up in this operation, without
+a separate approval for the agent's own disposable artifacts once useful work is
+retained or reproducible. Remove it before the final report using Git worktree
+removal without force, or the runtime's supported managed-worktree lifecycle.
+Move to a surviving directory first. On failure/interruption, remove reproducible
+temporary artifacts when possible; preserve irreplaceable work and report the
+specific reason and location of any remainder. Never silently discard valuable
+files or bypass a removal refusal. No background cleanup is implied.
 
 ## 1. Pin the inputs and release scope
 
@@ -96,8 +118,8 @@ git diff --exit-code "$S^{tree}" "$T"
 
 Otherwise, verify `T` itself. If runnable checks are needed, create a temporary
 candidate commit from `T` with parents `M` and `S` using `git commit-tree`, then
-check out that commit in a unique detached worktree at the location permitted by
-applicable project/machine instructions.
+use a suitable clean, free existing checkout when compatible with project policy,
+or check out that commit in a temporary detached worktree under the lifecycle above.
 Record its SHA and tree. This is a local assessment artifact, not a published
 commit or an update to either branch. Use isolated dependencies/configuration as
 needed; keep secrets out of output and preserve existing worktrees.
@@ -169,7 +191,7 @@ heavy local build rather than guessing a safe budget.
   Optional manual jobs do not block by themselves. Missing essential verification
   means NO-GO naming that missing check, not a demand to run every pipeline job.
 - Separate baseline failures from regressions using the same command/environment
-  on pinned target and candidate, in isolated worktrees when needed. If baseline
+  on pinned target and candidate, in temporary isolated worktrees when needed. If baseline
   failures prevent checking affected behavior, the evidence gap remains open.
 - Accept actual review in MR discussions, chat, or confirmed manual checks.
   Formal approvals remain mandatory when project/server rules require them.

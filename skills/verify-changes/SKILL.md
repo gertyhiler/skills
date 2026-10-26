@@ -6,7 +6,8 @@ description: Choose and execute proportionate verification for a code diff or in
 # Verify changes
 
 This skill verifies changes; it does not authorize publishing, merging, deployment,
-or task-tracker mutations.
+or task-tracker mutations. Execute requested checks under the project contract
+and return the final evidence report; no separate plan-approval pause is required.
 
 ## Resolve the project contract
 
@@ -20,6 +21,26 @@ If a required input is absent or conflicts with current configuration, state the
 specific missing decision and pause the dependent check. Continue safe diff and
 configuration inspection. Do not guess commands, budgets, or treat absent
 instructions as permission to skip required checks.
+
+## Worktree lifecycle
+
+Inspect refs/history/diffs without creating a checkout. Reuse an existing suitable
+checkout only when clean, free and compatible with task ownership. When separate
+files are needed for execution, create a temporary worktree at the project/machine
+permitted location; a temporary path does not replace explicit removal. Do not
+make a long-lived checkout depend on temporary dependencies or configuration.
+A reused checkout is borrowed, not disposable: preserve its original state and
+restore any temporary checkout selection after the operation without discarding
+concurrent changes. Remove only temporary worktrees created by this operation.
+
+Creating a temporary worktree includes cleaning it up in this operation, without
+a separate approval for the agent's own disposable artifacts once useful work is
+retained or reproducible. Remove it before the final report using Git worktree
+removal without force, or the runtime's supported managed-worktree lifecycle.
+Move to a surviving directory first. On failure/interruption, remove reproducible
+temporary artifacts when possible; preserve irreplaceable work and report the
+specific reason and location of any remainder. Never silently discard valuable
+files or bypass a removal refusal. No background cleanup is implied.
 
 ## Procedure
 
@@ -43,7 +64,8 @@ instructions as permission to skip required checks.
    to tests, lint, or typecheck. Do not invent a company-wide memory budget.
 5. Distinguish regressions from baseline failures by reproducing the same command
    under equivalent conditions on the pinned baseline when attribution matters.
-   Use isolated worktrees at the instructed location; preserve existing dirty work.
+   Use a temporary isolated worktree only when needed under the lifecycle above;
+   preserve existing dirty work.
    Do not label failures pre-existing based only on unchanged filenames. Baseline
    failures that prevent validating affected behavior remain an evidence gap.
 6. Record command/job, revision, outcome, and limitations. Reuse evidence only
