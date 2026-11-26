@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "url": "https://github.com/gertyhiler/skills.git",
+      "path": "skills/check-release",
+      "revision": "d1c38da0f03815b560f76293f206b3f2af4418f8"
+    }
+  ]
+}

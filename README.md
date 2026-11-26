@@ -20,12 +20,14 @@ Installing a skill never grants permission to deploy or discard work.
 | [verify-changes](skills/verify-changes/SKILL.md) | Choose proportionate checks and tie evidence to the actual diff or candidate. |
 | [deliver-to](skills/deliver-to/SKILL.md) | Deliver into a named non-production environment without overwriting its history. |
 | [check-release](skills/check-release/SKILL.md) | Assess the actual integration candidate; distinguish readiness from deployment. |
+| [release-readiness](skills/release-readiness/SKILL.md) | Keep the existing release assessment entry point with the same `check-release` procedure. |
 | [clean-worktrees](skills/clean-worktrees/SKILL.md) | Analyze all worktrees, present a cleanup plan in chat, then remove after confirmation. |
 | [debug](skills/debug/SKILL.md) | Run a project-native debug session with a temporary collector, reproduction pauses, confirmation and marked cleanup. |
 | [design-tests](skills/design-tests/SKILL.md) | Choose tests that protect observable behavior at the right level. |
 | [review](skills/review/SKILL.md) | Coordinate independent review of one candidate through the project's workflow. |
 | [review-spec](skills/review-spec/SKILL.md) | Trace implementation to approved requirements and domain rules. |
 | [review-code](skills/review-code/SKILL.md) | Check implementation, placement, regressions and affected consumers. |
+| [review-compatibility](skills/review-compatibility/SKILL.md) | Compare the candidate with the exact dependency revisions in the intended environment. |
 | [review-tests](skills/review-tests/SKILL.md) | Review the confidence a test suite actually provides. |
 | [review-design](skills/review-design/SKILL.md) | Compare a rendered interface with an approved design. |
 | [review-accessibility](skills/review-accessibility/SKILL.md) | Review semantics, keyboard interaction and focus. |
@@ -78,6 +80,11 @@ source ref or explicitly adopt updates from a tracked ref with `skillsx update`.
 For a manual installation of a standalone skill, copy the entire selected
 `skills/<name>/` directory to your agent's configured location. Review any existing
 copy before replacing it.
+
+Use `release-readiness` when the project already calls that entry point. Its
+manifest installs the compatible `check-release` revision and its dependencies.
+Install the listed dependencies explicitly when using an installer that does
+not resolve the manifest.
 
 `clean-worktrees` retains explicit-only invocation in its Codex metadata. Its
 instructions require a cleanup request and scoped authorization in every runtime.
