@@ -12,6 +12,9 @@ policy and managed-worktree lifecycle. Never assume a branch name or directory.
 Skills supply decision criteria; the runbook supplies project commands and execution
 order. Missing inputs block only dependent conclusions, not independent inspection.
 
+Delivery and review skills use the separate [operation-owned lifecycle](references/lifecycle.md).
+That procedure covers only disposable worktrees created during their own execution.
+
 ## Analyze all worktrees before asking for approval
 
 1. Inventory all registered worktrees in scope with `git worktree list --porcelain
