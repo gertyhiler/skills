@@ -87,8 +87,10 @@ that does not need a checkout.
 6. Recheck the remote target and any deployed dependency revisions used as
    preflight evidence before a normal push. If the target advanced, integrate its
    new state. Repeat the candidate, preflight or compatibility checks affected
-   by either change. Never overwrite concurrent work. Push only requested
-   targets and verify remote SHAs. Preserve source history.
+   by either change. Never overwrite concurrent work. Push the verified candidate
+   explicitly to the requested target ref through the project's delivery route.
+   From a detached checkout, use its candidate SHA or HEAD as the push source.
+   Verify remote SHAs and preserve source history.
 7. Waiting for CI alone does not require retaining a checkout; remove a completed
    temporary delivery worktree once its useful work is retained. Locate the pipeline for the exact pushed SHA AND target ref using the project's
    access procedure. Observe required build/deploy jobs from that revision. For
