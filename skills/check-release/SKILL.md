@@ -20,9 +20,14 @@ dependent steps.
   this skill has no fixed runbook location. Direct instructions or explicit user
   inputs can supply the same contract.
 - Resolve the release target, allowed merge method, mandatory checks/review gates,
-  access procedure, and worktree/resource rules. Check instructions against live
-  repository and server configuration. If required information is missing or
-  contradictory, name it and pause only dependent steps; continue safe diagnostics.
+  access procedure, worktree/resource rules, dependency evidence, and the
+  project's release report requirements. Check instructions against live
+  repository and server configuration. For an explicitly historical assessment,
+  interpret the live-ref and server checks below against the archived MR, ref,
+  deployment and configuration evidence at the requested cutoff. Disregard
+  later revisions and outcomes. A historical verdict applies to that snapshot.
+  If required information is missing or contradictory, name it and pause only
+  dependent steps; continue safe diagnostics.
   Never infer a release target or waive a gate because a document is absent.
 - Assessment permits reading the hosting service, fetching remote-tracking refs, calculating
   candidate objects, creating an isolated temporary worktree, and suitable checks.
@@ -37,23 +42,10 @@ dependent steps.
 
 ## Worktree lifecycle
 
-Inspect refs/history/diffs without creating a checkout. Reuse an existing suitable
-checkout only when clean, free and compatible with task ownership. When separate
-files are needed for execution, create a temporary worktree at the project/machine
-permitted location; a temporary path does not replace explicit removal. Do not
-make a long-lived checkout depend on temporary dependencies or configuration.
-A reused checkout is borrowed, not disposable: preserve its original state and
-restore any temporary checkout selection after the operation without discarding
-concurrent changes. Remove only temporary worktrees created by this operation.
-
-Creating a temporary worktree includes cleaning it up in this operation, without
-a separate approval for the agent's own disposable artifacts once useful work is
-retained or reproducible. Remove it before the final report using Git worktree
-removal without force, or the runtime's supported managed-worktree lifecycle.
-Move to a surviving directory first. On failure/interruption, remove reproducible
-temporary artifacts when possible; preserve irreplaceable work and report the
-specific reason and location of any remainder. Never silently discard valuable
-files or bypass a removal refusal. No background cleanup is implied.
+Resolve the installed `clean-worktrees` dependency through the consumer's
+registry or catalog. Read its `references/lifecycle.md` before selecting a
+workspace. If unavailable, name the missing dependency and continue inspection
+that does not need a checkout.
 
 ## 1. Pin the inputs and release scope
 
@@ -118,8 +110,7 @@ git diff --exit-code "$S^{tree}" "$T"
 
 Otherwise, verify `T` itself. If runnable checks are needed, create a temporary
 candidate commit from `T` with parents `M` and `S` using `git commit-tree`, then
-use a suitable clean, free existing checkout when compatible with project policy,
-or check out that commit in a temporary detached worktree under the lifecycle above.
+check out that commit in a unique temporary detached worktree under the lifecycle above.
 Record its SHA and tree. This is a local assessment artifact, not a published
 commit or an update to either branch. Use isolated dependencies/configuration as
 needed; keep secrets out of output and preserve existing worktrees.
@@ -198,13 +189,18 @@ heavy local build rather than guessing a safe budget.
 - Accept actual review in MR discussions, chat, or confirmed manual checks.
   Formal approvals remain mandatory when project/server rules require them.
   Missing review is not successful review; unresolved substantive findings block readiness.
-- Inspect affected production CI/config and external dependencies. Pre-merge
-  readiness does not require an already completed production deployment.
+- Inspect affected production CI and configuration. For a changed service,
+  migration or artifact boundary, apply the installed `review-compatibility`
+  dependency. Record the exact dependency revisions and whether the candidate can
+  operate with them at the intended release step. Include the applicable
+  transition order. Pre-merge readiness does not require an already completed
+  deployment of the candidate.
 
 ## 5. Bind the verdict to delivery
 
-Reread source and target from the server before the verdict. If either SHA changed,
-recalculate the candidate and reassess evidence; GO does not transfer to new refs.
+Reread source and target from the server before a live verdict. If either SHA
+changed, recalculate the candidate and reassess evidence. For a historical
+assessment, reconfirm both refs against the evidence at the cutoff.
 
 Start with **GO** or **NO-GO** for `source@S → target@M`, identifying the MR,
 merge method, and candidate tree `T`. Then report briefly:
@@ -212,6 +208,12 @@ merge method, and candidate tree `T`. Then report briefly:
 1. Blockers and the minimum actions needed to remove them.
 2. Evidence: release scope, candidate content preservation, checks, and review.
 3. Warnings and verification limits, separate from blockers.
+
+Account for every applicable project gate. Record any risk disposition with the
+owner, evidence and exact candidate under the project policy. When the project
+requires an MR integration report, return the full report for authorized
+publication or use the project's authorized reporting route. An assessment
+alone does not authorize remote writes.
 
 GO requires a verified candidate against the current target, preserved intended changes
 on both sides, appropriate candidate checks, no substantive unresolved findings,

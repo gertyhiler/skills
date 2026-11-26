@@ -10,8 +10,8 @@ request.
 | --- | --- |
 | Change review | Applicable directions, skill IDs and companion skills, canonical requirements and implementation rules, report language, available evidence, and owner decisions. |
 | Verification | Required checks, authoritative scripts/Make targets, baseline, candidate, test conventions, applicable build limits. |
-| Environment delivery | Named target and remote, merge/cherry-pick policy, required preflight, automatic/manual deployment behavior, runtime acceptance, access procedure. |
-| Release readiness | Release target, intended merge method, required checks/review, hosting restrictions and acceptable evidence. |
+| Environment delivery | Named target and remote, merge/cherry-pick policy, required preflight, compatibility evidence for affected dependencies, automatic/manual deployment behavior, runtime acceptance, access procedure. |
+| Release readiness | Release target, intended merge method, required checks/review, hosting restrictions, dependency revisions and rollout order when applicable, and destination and content of the integration report. |
 | Delivery review | Claimed step, exact revision/environment, required evidence, actual command/job outcomes and deferred scope. |
 | Investigations and access | Intended environment, schema/code sources, service labels/datasources, ignored local configuration, read-only role and evidence handling. |
 | Worktrees | Repository roots and allowed locations, reuse/isolation policy, active task ownership, release and environment targets, treatment of ignored files and dependencies, cleanup commands/order and available managed-worktree lifecycle. |
@@ -39,8 +39,9 @@ per-directory approvals. Delivery, verification and release assessment execute
 the requested operation without a generic plan-approval gate, subject to actual
 project authorization and missing-input boundaries.
 
-Temporary delivery/check/candidate worktrees are operation-owned: create only when
-needed and remove before reporting, or explain the concrete retained work/blocker.
+Temporary delivery/check/candidate worktrees are operation-owned: create unique
+detached worktrees only when needed at a project-approved location and remove
+them before reporting, or explain the concrete retained work/blocker.
 The project completion workflow should remove a merged task checkout after checking
 for additional unique work and active use. Assessment alone does not merge or
 schedule future cleanup; runtime actions occur only in the authorized operation.

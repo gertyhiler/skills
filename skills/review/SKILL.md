@@ -17,7 +17,8 @@ description: Coordinate independent review of a candidate diff using the project
 3. Assign one fresh, read-only reviewer session to each applicable direction,
    including implementation correctness when selected. The coordinator handles
    applicability, handoff and synthesis. Each reviewer receives its own question,
-   the same candidate and approved requirements, relevant rules, raw evidence and
+   the same candidate and approved requirements, exact applicable project document
+   paths, relevant rules, raw evidence and
    the [report contract](references/report.md). Start without the author's context
    or other reviewers' conclusions. Use the
    [code and specification workflow](references/code-and-spec.md) for those
@@ -27,7 +28,9 @@ description: Coordinate independent review of a candidate diff using the project
    Load [specialist directions](references/specialists.md) only when applicable.
    If native delegation is unavailable, use a separate read-only reviewer session
    when supported and allowed. An assigned reviewer performs its own direction
-   directly and returns findings to the coordinator. If an applicable direction
+   directly and returns findings and the project rules it applied to the
+   coordinator. Use the project-selected reviewer model and effort when available
+   and report a fallback explicitly. If an applicable direction
    has no independent result, record the coverage gap and its reason.
 4. Consolidate findings and coverage, retaining disagreements, failed checks,
    missing evidence and reasons for inapplicability. Tie each result to the

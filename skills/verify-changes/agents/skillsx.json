@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "url": "https://github.com/gertyhiler/skills.git",
+      "path": "skills/clean-worktrees",
+      "revision": "3221dce11e7588625826e34a70db2b9b80f80e27"
+    }
+  ]
+}

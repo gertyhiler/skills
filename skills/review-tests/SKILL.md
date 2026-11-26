@@ -16,7 +16,7 @@ order of asynchronous or concurrent operations when they affect the contract.
 
 For each relied-upon test ask:
 
-1. What practical regression would make it fail?
+1. Which exact observable assertion fails if the protected behavior changes?
 2. Does it test a public/observable contract or incidental implementation?
 3. Is its level appropriate: pure logic, integration, browser interaction or visual?
 4. Are mocks limited to unstable or expensive boundaries?
@@ -32,6 +32,10 @@ navigation/accessibility state is valid when it is the protected behavior. A fil
 format can itself be a contract; distinguish that from checking copied source.
 For fidelity inspect screenshots of real components/routes. For meaningful UI
 controls require interaction evidence; do not invent interactions for static text.
+For an interaction regression trace the actual user action and exact affected
+state or target. For example, a modal rendering test does not prove focus
+returns to the triggering control on close. Identify the assertion that would
+fail under that specific regression, or report the coverage gap.
 For rules/calculations prefer deterministic assertions over screenshot inference.
 
 Do not demand a coverage percentage, mandatory reviewer chain or a test for every
