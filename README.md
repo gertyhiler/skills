@@ -42,36 +42,45 @@ skills with AGENTS.md, runbooks and ignored `.agents/local/.env.agents` files.
 
 ## Install only what you need
 
-Use the [Skills CLI](https://github.com/vercel-labs/skills) from your consumer
-repository:
+For skills without package dependencies, use the
+[Skills CLI](https://github.com/vercel-labs/skills) from your consumer repository:
 
 ```sh
 npx skills add gertyhiler/skills --list
 npx skills add gertyhiler/skills --skill verify-changes -a codex
 ```
 
-For a project already managed by [SkillsX](https://github.com/gertyhiler/skillsx),
-register this repository as a source and install the selected package:
+### Install the review coordinator
+
+Use [SkillsX 0.2.0 or later](https://github.com/gertyhiler/skillsx/releases/tag/v0.2.0)
+in the consumer repository. Run `skillsx init` first if the project has no SkillsX
+registry. Register each source URL once and reuse its existing source ID if
+already registered.
 
 ```sh
 skillsx source personal --url https://github.com/gertyhiler/skills.git --ref main
+skillsx source matt --url https://github.com/mattpocock/skills.git
 skillsx install review --source personal --path skills/review
 skillsx verify
 ```
 
-Install the review directions named by the project's workflow. Set an approved
-commit ref for a fixed version, or use a tracked ref and explicitly run
-`skillsx update` when adopting an update.
+The [review manifest](skills/review/agents/skillsx.json) pins Matt Pocock's
+`code-review` by Git URL, path and commit. SkillsX installs it alongside `review`
+or reuses a matching entry. When a global or legacy skill also uses `code-review`,
+resolve the project entry in `.agents/skills.registry.json` and open its installed
+`SKILL.md`. A fresh dependency install uses `.agents/skills/code-review/SKILL.md`.
 
-Other supported agents can use the same Markdown skills. Alternatively, copy the
-whole selected `skills/<name>/` directory into your agent's configured skill
-location, including any supporting files. Never silently overwrite a local skill
-with the same name. Review updates before replacing an installed copy.
+The project workflow selects any additional review directions and supporting
+documents. Existing directions, including `review-code`, can be installed and
+invoked directly. To control updates to your selected packages, use an approved
+source ref or explicitly adopt updates from a tracked ref with `skillsx update`.
 
-The procedures are independently installable; no other skill in this repository
-is required. `clean-worktrees` retains explicit-only invocation in its Codex
-metadata. Other agent runtimes may not enforce that metadata; its instructions
-still require a cleanup request and scoped authorization.
+For a manual installation of a standalone skill, copy the entire selected
+`skills/<name>/` directory to your agent's configured location. Review any existing
+copy before replacing it.
+
+`clean-worktrees` retains explicit-only invocation in its Codex metadata. Its
+instructions require a cleanup request and scoped authorization in every runtime.
 
 ## Connect your project
 
@@ -121,10 +130,10 @@ claims, each requiring its own evidence.
 
 ## Maintain
 
-Maintenance and executable skills use **Python 3.12+ through uv**. No Node runtime
-or consumer application dependency is required. Git and Make are used for repository
-maintenance. See [the runtime contract](docs/runtime.md) for isolated installation,
-locked execution and migration from the earlier Node commands.
+Repository checks and bundled helpers use **Python 3.12+ through uv**. Git and
+Make are used for repository maintenance. See [the runtime contract](docs/runtime.md)
+for isolated installation, locked execution and migration from the earlier Node
+commands.
 
 ```sh
 make setup

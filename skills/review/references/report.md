@@ -7,6 +7,7 @@ evidence. Include previous findings for the same direction when repeating a revi
 Use the project's report language. A direction's report contains:
 
 - **Scope** — direction, target/ref SHA, base, candidate and reviewed area.
+  Identify the upstream reviewer package used, or the fallback and its reason.
 - **Findings** — severity, location or reproducible evidence, trigger, expected and
   observed behavior, and impact. Identify baseline debt where it matters.
 - **Verification** — commands or actions you ran, conditions and outcomes.
