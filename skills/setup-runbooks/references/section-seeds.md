@@ -18,6 +18,14 @@ copy of script internals. Distinguish unknown, not applicable and verified.
 - Evidence reuse conditions and treatment of baseline failures.
 - Temporary checkout/configuration lifecycle and final evidence format.
 
+## Change review — review
+
+- Project directions and what makes each applicable, skill IDs and companion skills.
+- Requirement, architecture, testing, documentation and design sources selected
+  per direction. Name concrete project risks and how to obtain local evidence.
+- Report language, destination, integration requirements and owner responsibility.
+  Link the installed review skill for execution order and report format.
+
 ## Environment delivery — deliver-to
 
 - Named environments mapped to verified remote/target refs; accumulated history.

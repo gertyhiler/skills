@@ -55,6 +55,9 @@ files or bypass a removal refusal. No background cleanup is implied.
 3. Execute focused checks first. Expand for required project gates, changed shared
    behavior, failures, explicit requests, or unresolved risk. Resolve executable
    commands from the documented source, such as package scripts or build targets.
+   For an added or changed required check, verify the clean case and an isolated
+   intentional violation through its real hook, job or command entry point.
+   Record which check failed and how the caller reported the failure.
    Do not assume a command named `verify` includes a production build. A required
    delivery preflight is a separate obligation handled by deliver-to.
 4. Before a heavy local build, resolve applicable project/machine resource policy

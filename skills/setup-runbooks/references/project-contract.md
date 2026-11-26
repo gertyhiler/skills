@@ -8,6 +8,7 @@ request.
 
 | Procedure | Project inputs |
 | --- | --- |
+| Change review | Applicable directions, skill IDs and companion skills, canonical requirements and implementation rules, report language, available evidence, and owner decisions. |
 | Verification | Required checks, authoritative scripts/Make targets, baseline, candidate, test conventions, applicable build limits. |
 | Environment delivery | Named target and remote, merge/cherry-pick policy, required preflight, automatic/manual deployment behavior, runtime acceptance, access procedure. |
 | Release readiness | Release target, intended merge method, required checks/review, hosting restrictions and acceptable evidence. |

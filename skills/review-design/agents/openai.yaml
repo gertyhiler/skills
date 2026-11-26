@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Design"
+  short_description: "Compare a rendered interface with its design"
+  default_prompt: "Use $review-design for this change."

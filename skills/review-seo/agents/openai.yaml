@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Seo"
+  short_description: "Review public route and indexing changes"
+  default_prompt: "Use $review-seo for this change."

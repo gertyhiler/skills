@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Spec"
+  short_description: "Review approved requirements against a diff"
+  default_prompt: "Use $review-spec for this change."

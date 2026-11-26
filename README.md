@@ -23,7 +23,14 @@ Installing a skill never grants permission to deploy or discard work.
 | [clean-worktrees](skills/clean-worktrees/SKILL.md) | Analyze all worktrees, present a cleanup plan in chat, then remove after confirmation. |
 | [debug](skills/debug/SKILL.md) | Run a project-native debug session with a temporary collector, reproduction pauses, confirmation and marked cleanup. |
 | [design-tests](skills/design-tests/SKILL.md) | Choose tests that protect observable behavior at the right level. |
-| [review-tests](skills/review-tests/SKILL.md) | Review the confidence a test suite actually provides, without editing it. |
+| [review](skills/review/SKILL.md) | Coordinate independent review of one candidate through the project's workflow. |
+| [review-spec](skills/review-spec/SKILL.md) | Trace implementation to approved requirements and domain rules. |
+| [review-code](skills/review-code/SKILL.md) | Check implementation, placement, regressions and affected consumers. |
+| [review-tests](skills/review-tests/SKILL.md) | Review the confidence a test suite actually provides. |
+| [review-design](skills/review-design/SKILL.md) | Compare a rendered interface with an approved design. |
+| [review-accessibility](skills/review-accessibility/SKILL.md) | Review semantics, keyboard interaction and focus. |
+| [review-seo](skills/review-seo/SKILL.md) | Review public routes and indexing behavior. |
+| [review-docs](skills/review-docs/SKILL.md) | Verify affected documentation against its canonical sources. |
 | [organize-code](skills/organize-code/SKILL.md) | Place code by ownership and keep primitives, compositions and internal modules distinct. |
 | [review-delivery](skills/review-delivery/SKILL.md) | Review evidence behind a delivery or runtime-readiness claim. |
 | [grafana-access](skills/grafana-access/SKILL.md) | Read bounded Loki logs and Prometheus metrics through a project-local access contract. |
@@ -42,6 +49,19 @@ repository:
 npx skills add gertyhiler/skills --list
 npx skills add gertyhiler/skills --skill verify-changes -a codex
 ```
+
+For a project already managed by [SkillsX](https://github.com/gertyhiler/skillsx),
+register this repository as a source and install the selected package:
+
+```sh
+skillsx source personal --url https://github.com/gertyhiler/skills.git --ref main
+skillsx install review --source personal --path skills/review
+skillsx verify
+```
+
+Install the review directions named by the project's workflow. Set an approved
+commit ref for a fixed version, or use a tracked ref and explicitly run
+`skillsx update` when adopting an update.
 
 Other supported agents can use the same Markdown skills. Alternatively, copy the
 whole selected `skills/<name>/` directory into your agent's configured skill
@@ -66,6 +86,7 @@ examples, not required filenames:
 ```markdown
 ## Project workflow runbooks
 
+- Review workflow: docs/workflows/review.md
 - Verification: docs/runbooks/verification.md
 - Environment delivery: docs/runbooks/delivery.md
 - Release readiness: docs/runbooks/release.md
@@ -86,6 +107,7 @@ invent a branch, command or approval.
 
 ```text
 Verify this diff against the project's testing policy.
+$review — review this candidate using the project's workflow.
 Assess this branch against the current release target; do not merge it.
 $deliver-to stage — deliver these commits using the project runbook.
 Investigate this intermittent bug using temporary local traces.

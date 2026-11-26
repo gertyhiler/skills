@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Accessibility"
+  short_description: "Review accessibility of affected user flows"
+  default_prompt: "Use $review-accessibility for this change."

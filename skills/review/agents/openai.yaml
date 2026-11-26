@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review"
+  short_description: "Review a change with independent evidence"
+  default_prompt: "Use $review for this change."

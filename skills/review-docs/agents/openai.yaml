@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Docs"
+  short_description: "Review documentation against canonical sources"
+  default_prompt: "Use $review-docs for this change."

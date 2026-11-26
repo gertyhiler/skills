@@ -19,6 +19,8 @@ For each relied-upon test ask:
 5. Could the feature be broken while the test remained green?
 6. Is the test actually discovered and run by the cited command/CI project?
 7. Are the important affected failure paths represented?
+8. Would removing this test leave the same regression covered at the same boundary?
+9. Do removed, weakened or skipped assertions leave an important scenario unprotected?
 
 Source-string checks, CSS classes or DOM shape are not visual evidence. A semantic
 navigation/accessibility state is valid when it is the protected behavior. A file
@@ -31,7 +33,8 @@ Do not demand a coverage percentage, mandatory reviewer chain or a test for ever
 line. Treat legacy low-value tests as debt, not a precedent or permission for a
 broad cleanup. Flag only relevant gaps and explain their practical consequence.
 
-Return findings with test/behavior locations, severity and evidence, then checks
+Identify the candidate and reviewed scope. Return findings with test/behavior
+locations, severity, the regression at stake and evidence, then checks
 actually run, unresolved questions and limits. A test existing is not evidence it
 passed; a passing suite does not prove deployment or visual acceptance. If no
 material finding exists, say so. Accepted fixes return to normal implementation.

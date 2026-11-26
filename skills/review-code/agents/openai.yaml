@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Code"
+  short_description: "Review implementation and consumer effects"
+  default_prompt: "Use $review-code for this change."

@@ -186,6 +186,8 @@ heavy local build rather than guessing a safe budget.
   risk. Source tests may cover candidate content when the trees match and the
   relevant environment/configuration is equivalent. Otherwise run or obtain
   candidate checks; old source results are not automatically transferable.
+  When the project requires multiple release artifacts, account for each
+  artifact's candidate revision, build configuration and result separately.
 - When project/server rules allow alternative evidence, a dedicated MR pipeline
   is unnecessary if suitable evidence exists elsewhere.
   Optional manual jobs do not block by themselves. Missing essential verification
