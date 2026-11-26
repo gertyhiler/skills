@@ -198,12 +198,15 @@ heavy local build rather than guessing a safe budget.
 
 ## 5. Bind the verdict to delivery
 
-Reread source and target from the server before a live verdict. If either SHA
-changed, recalculate the candidate and reassess evidence. For a historical
-assessment, reconfirm both refs against the evidence at the cutoff.
+Before a live verdict, reread source and target refs, effective merge
+requirements and the deployed revisions used as compatibility evidence. If
+an input changed, recompute the candidate when affected and repeat the checks
+whose evidence no longer matches. For a historical assessment, reconfirm these
+inputs against evidence from the cutoff.
 
 Start with **GO** or **NO-GO** for `source@S → target@M`, identifying the MR,
-merge method, and candidate tree `T`. Then report briefly:
+merge method, and candidate tree `T`. Label any historical verdict with its
+cutoff and environment. Then report briefly:
 
 1. Blockers and the minimum actions needed to remove them.
 2. Evidence: release scope, candidate content preservation, checks, and review.
@@ -221,8 +224,10 @@ all project-required gates satisfied, and no active server restriction
 preventing the proposed delivery method. Source may still be behind target. Unverified mandatory evidence means NO-GO due to an
 evidence gap, not a claim that a defect was found.
 
-At actual delivery, recheck both input SHAs and confirm the resulting target tree
-matches `T`. A changed input, merge method, or result invalidates the old verdict
-and requires reassessment. State this condition in the handoff; the assessment
+At actual delivery, recheck both input SHAs, merge requirements, method and
+relevant deployed dependency revisions before proceeding. After integration
+confirm the resulting target tree matches `T`. A changed input or result
+requires reassessment of the affected evidence. A historical GO always requires
+a fresh live assessment for delivery. Include this in the handoff. The assessment
 itself does not authorize delivery. Production completion remains separate:
 merge → build → deploy → runtime acceptance.

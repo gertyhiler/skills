@@ -49,7 +49,7 @@ For skills without package dependencies, use the
 
 ```sh
 npx skills add gertyhiler/skills --list
-npx skills add gertyhiler/skills --skill verify-changes -a codex
+npx skills add gertyhiler/skills --skill design-tests -a codex
 ```
 
 ### Install the review coordinator

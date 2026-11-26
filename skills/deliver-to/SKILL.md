@@ -84,9 +84,11 @@ that does not need a checkout.
    pass; it must be explicitly selected by the project. Even then, integration
    edits/conflicts or unresolved risks require proportionate additional checks.
    Missing policy is not permission to skip preflight or essential verification.
-6. Recheck the remote target before a normal push. If it advanced, integrate its
-   new state and reassess candidate/preflight evidence; never overwrite concurrent
-   work. Push only requested targets and verify remote SHAs. Preserve source history.
+6. Recheck the remote target and any deployed dependency revisions used as
+   preflight evidence before a normal push. If the target advanced, integrate its
+   new state. Repeat the candidate, preflight or compatibility checks affected
+   by either change. Never overwrite concurrent work. Push only requested
+   targets and verify remote SHAs. Preserve source history.
 7. Waiting for CI alone does not require retaining a checkout; remove a completed
    temporary delivery worktree once its useful work is retained. Locate the pipeline for the exact pushed SHA AND target ref using the project's
    access procedure. Observe required build/deploy jobs from that revision. For
