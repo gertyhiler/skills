@@ -75,9 +75,14 @@ copy of script internals. Distinguish unknown, not applicable and verified.
 - review-delivery: claimed revision/environment, required evidence sources,
   publication/deployment/acceptance distinctions and unresolved gaps.
 
-## Agent entrypoint links
+## Agent entrypoint rules and links
 
-Add a concise process name, its scope and a link to its authoritative section in
-the project's existing entrypoint. Update an existing block rather than appending
-another. Do not reproduce the runbook in AGENTS.md or CLAUDE.md. Link only existing
-or approved newly created documents, and preserve nested-scope rules.
+Add concise process names, scope and links to authoritative sections in the
+project's existing versioned agent entrypoint. Update the existing block and
+preserve nested-scope rules. Link existing or approved new documents.
+
+For Verification, add or reconcile the rule requiring the project's applicable
+checks on the current candidate before reporting completion. Record the checked
+SHA or diff, commands, observed results, and any failed or unrun required check
+with its reason. Reuse evidence only for matching content and relevant conditions.
+Keep command details and reproduction conditions in the linked project runbook.

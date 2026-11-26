@@ -59,8 +59,9 @@ or authorization with a plausible default. Partial setup must be reported as par
 ## 3. Show the concrete draft and wait
 
 Show exact proposed paths and new section text or focused edits, including the
-entrypoint links. Keep the preview self-contained in chat. Explain what existing
-text remains authoritative and what contradiction the proposed edit resolves.
+agent entrypoint rules and links. For verification, show the project-owned
+completion rule and its link to the exact checks. Keep the preview self-contained
+in chat and identify the authoritative sources and conflicts being resolved.
 
 Prefer existing document organization. For a new project, suggest a small runbook
 with sections or docs/runbooks/ when justified; neither path nor file count is

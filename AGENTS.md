@@ -15,10 +15,12 @@ packages to their exact Git URL, path and commit. Keep project-selected companio
 in the consumer workflow. Preserve explicit invocation policy when adapting an
 existing skill.
 
-Run `make verify` after edits and before reporting completion. Report the checks
-actually run and the reason for any required check that could not run. Test access
-helpers with isolated fixtures and fictional credentials. Review risky workflow
-changes against realistic scenarios as well as running structural validation.
+Run `make verify` on the current candidate after edits and before reporting
+completion. Report the checked SHA or diff, commands and observed outcomes.
+Reuse evidence only when the checked content and relevant conditions match.
+Report any failed or unrun required check and its reason as an unresolved check.
+Test access helpers with isolated fixtures and fictional credentials. Review
+risky workflow changes against realistic scenarios alongside structural checks.
 No automatic multi-agent fanout, review loop, publishing or baseline acceptance.
 No application build or deployment exists in this documentation repository.
 Local research and evidence belong in ignored .agents/work/.
