@@ -14,16 +14,21 @@ description: Coordinate independent review of a candidate diff using the project
    For uncommitted work, capture the complete intended patch, including new files.
    Resolve the approved requirements, source access, and verification results.
    Reuse results only for matching content and relevant inputs.
-3. Run the applicable directions in fresh, read-only reviewer contexts when
-   delegation is available and allowed. Pass each its question, the same candidate
-   and approved requirements, relevant rules and raw evidence, and the
-   [report contract](references/report.md). Use the
+3. Assign one fresh, read-only reviewer session to each applicable direction,
+   including implementation correctness when selected. The coordinator handles
+   applicability, handoff and synthesis. Each reviewer receives its own question,
+   the same candidate and approved requirements, relevant rules, raw evidence and
+   the [report contract](references/report.md). Start without the author's context
+   or other reviewers' conclusions. Use the
    [code and specification workflow](references/code-and-spec.md) for those
-   directions, including the prescribed use of Matt Pocock's `code-review`.
+   directions and the implementation pass, including the prescribed use of Matt
+   Pocock's `code-review`.
    Use the workflow's named specialist skill for other assigned directions.
    Load [specialist directions](references/specialists.md) only when applicable.
-   Report unavailable reviewer or evidence coverage. An assigned reviewer performs
-   its own direction directly and returns findings to the coordinator.
+   If native delegation is unavailable, use a separate read-only reviewer session
+   when supported and allowed. An assigned reviewer performs its own direction
+   directly and returns findings to the coordinator. If an applicable direction
+   has no independent result, record the coverage gap and its reason.
 4. Consolidate findings and coverage, retaining disagreements, failed checks,
    missing evidence and reasons for inapplicability. Tie each result to the
    candidate and report documentation impact. Repeat affected directions when

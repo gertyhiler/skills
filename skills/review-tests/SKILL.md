@@ -6,9 +6,13 @@ description: Review whether tests protect meaningful behavior at the right level
 # Review the evidence tests provide
 
 Read the project's testing policy and inspect the changed behavior, its direct
-consumers, relevant tests and runner configuration. Stay within the requested
-scope. This is a read-only review of implementation; do not repair tests or update
-baselines while reviewing them.
+consumers, relevant tests and runner configuration for the requested scope. Keep
+source, tests and baselines unchanged throughout the review.
+
+Map the material behavior changes to assertions in the existing tests, including
+relevant suites outside the diff. Look for gaps in critical outcomes, boundary
+and rejection cases, and recovery from errors. Consider partial failure and the
+order of asynchronous or concurrent operations when they affect the contract.
 
 For each relied-upon test ask:
 
@@ -18,7 +22,8 @@ For each relied-upon test ask:
 4. Are mocks limited to unstable or expensive boundaries?
 5. Could the feature be broken while the test remained green?
 6. Is the test actually discovered and run by the cited command/CI project?
-7. Are the important affected failure paths represented?
+7. Is the test's intended behavior clear, and would the test survive a refactor
+   that preserves that behavior?
 8. Would removing this test leave the same regression covered at the same boundary?
 9. Do removed, weakened or skipped assertions leave an important scenario unprotected?
 
@@ -31,10 +36,15 @@ For rules/calculations prefer deterministic assertions over screenshot inference
 
 Do not demand a coverage percentage, mandatory reviewer chain or a test for every
 line. Treat legacy low-value tests as debt, not a precedent or permission for a
-broad cleanup. Flag only relevant gaps and explain their practical consequence.
+broad cleanup. Flag only relevant gaps and prioritize them by the consequence of
+a regression. For each gap, state the scenario that could fail while the suite
+stays green and the test boundary where an assertion would catch it.
 
 Identify the candidate and reviewed scope. Return findings with test/behavior
 locations, severity, the regression at stake and evidence, then checks
 actually run, unresolved questions and limits. A test existing is not evidence it
 passed; a passing suite does not prove deployment or visual acceptance. If no
 material finding exists, say so. Accepted fixes return to normal implementation.
+
+The behavior mapping and gap prioritization are adapted from Anthropic's
+[`pr-test-analyzer`](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/pr-review-toolkit/agents/pr-test-analyzer.md).

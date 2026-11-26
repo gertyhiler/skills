@@ -4,8 +4,8 @@ Use the [report contract](report.md) for each applicable direction.
 
 ## Route Standards and Spec
 
-- For a committed candidate with both directions selected and fresh read-only
-  delegation available, use the installed `code-review` from
+- For a committed candidate with Standards and Spec selected and fresh read-only
+  reviewer sessions available, use the installed `code-review` from
   `mattpocock/skills` at the revision in
   [the SkillsX manifest](../agents/skillsx.json). Resolve the installed package
   from its registry source, path, and revision or the project's explicit verified
@@ -18,20 +18,21 @@ Use the [report contract](report.md) for each applicable direction.
   Pass the supplied requirement source and project rules explicitly. A supplied
   source is sufficient when Pocock's tracker setup is missing or inapplicable.
   Project rules govern source precedence, applicable directions and review scope.
-- Coordinate Pocock's Standards and Spec briefs once from the top-level review.
-  Before dispatch, tell each reviewer to carry out its assigned brief directly
-  and return findings. Use separate fresh, read-only contexts when available;
-  each reviewer inspects the candidate without invoking review again or delegating.
-  Preserve the two conclusions and record the upstream package used.
+- Extract Pocock's Standards and Spec briefs once at the top level and assign
+  each to its own fresh, read-only reviewer. Each reviewer executes that brief
+  directly, without invoking review or delegating again. Preserve the two
+  conclusions and record the upstream package used.
 - For an uncommitted or otherwise nonmatching candidate, a single selected
-  direction, or unavailable upstream package or delegation, use the project's
-  selected standalone `review-code` or `review-spec` when present. Otherwise
-  apply the relevant brief below to the exact supplied patch or tree. Report
-  the fallback and any limitation on independence, inputs, or coverage.
+  direction, or an unavailable upstream package, use the project's
+  selected standalone `review-code` or `review-spec` when present. Apply its
+  instructions for the assigned direction. Otherwise assign the relevant brief
+  below to the exact patch or tree in a fresh reviewer session. Report the
+  fallback and any limitation on coverage.
 
 ## Review behavior and requirements
 
-- For implementation correctness, trace material changes through the actual
+- Give implementation correctness its own reviewer when the project's workflow
+  selects it. Trace material changes through the actual
   entry point and affected consumers. Check ownership, failure paths, and effects
   on adjacent contracts. For each material behavior change, use the approved
   expectation to choose a successful case and a risk-relevant counterexample.
