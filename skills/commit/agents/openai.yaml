@@ -1,0 +1,6 @@
+interface:
+  display_name: "Commit"
+  short_description: "Prepare logical, project-compliant commits"
+  default_prompt: "Use $commit to prepare the requested commits."
+policy:
+  allow_implicit_invocation: false

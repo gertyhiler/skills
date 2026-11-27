@@ -17,6 +17,7 @@ observed success criteria and cleanup. Preserve the project's language.
 | `docs/TESTING.md` | What tests are worth writing, observable behavior, regression examples, boundaries, test levels, mocks and any browser/visual requirements. Link existing runner configuration and explain how to locate a relevant suite. |
 | `docs/agents/testing.md` | Concise criteria for selecting, writing and reviewing a test. Link directly to the human testing policy and the verification workflow for execution and evidence. |
 | `docs/CODING_STANDARDS.md` | Project conventions for implementation, errors, contracts, documentation updates and tooling. Link authoritative tools and decisions. |
+| `docs/agents/git.md` | Commit message syntax, language, issue identifiers, applicable hooks or checks and who may stage or commit. Point to existing repository conventions and distinguish preparing a commit from creating it. |
 | `docs/agents/coding-standards.md` | Applicable Standards and implementation review rules, coverage of nested rules and direct link to the human coding standards. |
 
 ## Workflow documents

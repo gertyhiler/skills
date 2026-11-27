@@ -48,6 +48,7 @@ validity, installed bytes and projections.
 | Testing policy and test design | `docs/TESTING.md` |
 | Coding conventions | `docs/CODING_STANDARDS.md` |
 | Agent-facing extraction and links for those policies | `docs/agents/{architecture,testing,coding-standards}.md` |
+| Git message rules, validation and commit authority | `docs/agents/git.md` |
 | Workflow decisions and project execution details | `docs/agents/workflows/` |
 | Issue routing and domain vocabulary/decisions | Matt's `docs/agents/issue-tracker.md` and `docs/agents/domain.md` |
 | Tracker triage labels when a selected skill needs them | Matt's `docs/agents/triage-labels.md` |

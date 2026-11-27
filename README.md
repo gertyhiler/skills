@@ -17,6 +17,7 @@ Installing a skill never grants permission to deploy or discard work.
 | Skill | When it helps |
 | --- | --- |
 | [setup-workflows](skills/setup-workflows/SKILL.md) | Audit installed skill contracts, then preview and reconcile the required project documents. |
+| [commit](skills/commit/SKILL.md) | Group changes and prepare or create commits under the project Git policy. |
 | [verify-changes](skills/verify-changes/SKILL.md) | Choose proportionate checks and tie evidence to the actual diff or candidate. |
 | [deliver-to](skills/deliver-to/SKILL.md) | Deliver into a named non-production environment without overwriting its history. |
 | [check-release](skills/check-release/SKILL.md) | Assess the actual integration candidate; distinguish readiness from deployment. |
