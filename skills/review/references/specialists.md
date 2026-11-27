@@ -3,24 +3,20 @@
 Use the directions selected by the project workflow. Give each reviewer the
 fixed candidate and comparison base, applicable requirements, changed paths and
 raw evidence from the [review handoff](report.md). For work in progress, include
-the complete intended patch, including staged changes and new files. If a chosen
-reviewer is unavailable, use the workflow's fallback or report the coverage gap.
+the complete intended snapshot, including selected new files. If a chosen
+reviewer is unavailable, report the coverage gap.
 
 ## Test coverage review
 
-Assign the workflow's test skill to its own reviewer. When the workflow selects
-test review without naming a skill, use installed `review-tests`, a portable
-adaptation of Anthropic's method. If the chosen skill is unavailable and the
-workflow allows a direct brief, assign a reviewer to map changed behavior to the
-tests that would fail on a concrete regression. Inspect test location, runner
-discovery, assertions and the actual interaction or integration boundary.
-Identify uncovered behavior and distinguish static coverage from executed tests.
+Use `review-tests` when the workflow names it. Follow the entrypoint's independent
+or explicitly requested direct mode. The review maps changed behavior to specific
+failing assertions and confirms which tests the runner discovers and executes.
 [Upstream method](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/pr-review-toolkit/agents/pr-test-analyzer.md)
 
 ## Defensive security review
 
-When the workflow selects a security-sensitive change, assign a separate
-reviewer for the affected component and its callers. The read-only checks below
+When the workflow selects defensive review, scope it to the affected component
+and its callers. The read-only checks below
 draw on history and impact analysis from the [Trail of Bits differential review
 skill](https://github.com/trailofbits/skills/tree/main/plugins/differential-review).
 

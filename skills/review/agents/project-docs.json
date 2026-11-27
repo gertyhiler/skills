@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "required": [
+    "docs/agents/workflows/review.md#spec",
+    "docs/agents/workflows/review.md#implementation",
+    "docs/agents/issue-tracker.md",
+    "docs/agents/domain.md",
+    "docs/agents/coding-standards.md",
+    "CONTRIBUTING.md"
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Set Up Workflows"
+  short_description: "Audit and reconcile project workflow contracts"
+  default_prompt: "Use $setup-workflows to audit this project's installed skill contracts and propose any needed documentation changes."
+policy:
+  allow_implicit_invocation: false

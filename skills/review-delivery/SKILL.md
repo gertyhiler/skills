@@ -5,10 +5,9 @@ description: Review evidence for delivery, deployment, migration or external run
 
 # Review delivery readiness
 
-Stay read-only. Review the requested delivery claim against the consumer project's
-runbook and the supplied artifacts. Do not dispatch another reviewer or require
-another skill. Unlike check-release, this is an evidence review rather than
-a procedure for assembling and validating a release integration candidate.
+Stay read-only. Read `docs/agents/workflows/delivery.md#evidence` and the supplied
+artifacts. Evaluate the evidence for the requested delivery claim. This skill
+runs in one reviewer session.
 
 1. Identify the exact claim: implemented, verified, published, deployed, migrated
    or accepted at runtime. Record revision, target environment and deferred scope.

@@ -15,10 +15,11 @@ dependent steps.
 
 ## Scope and access
 
-- Read applicable `AGENTS.md` instructions. Follow its **Release readiness**,
-  **Verification**, and hosting-access runbook pointers (for example, **GitLab access**). Paths are project-defined;
-  this skill has no fixed runbook location. Direct instructions or explicit user
-  inputs can supply the same contract.
+- Read applicable `AGENTS.md` instructions and the declared [project
+  documents](agents/project-docs.json). Use the production rules in
+  `docs/agents/workflows/delivery.md` and the exact sources those documents name.
+  Report a missing document, section, or decision at its declared location.
+  Continue only the independent parts of the assessment.
 - Resolve the release target, allowed merge method, mandatory checks/review gates,
   access procedure, worktree/resource rules, dependency evidence, and the
   project's release report requirements. Check instructions against live
@@ -48,6 +49,13 @@ workspace. If unavailable, name the missing dependency and continue inspection
 that does not need a checkout.
 
 ## 1. Pin the inputs and release scope
+
+For a release request, follow the [release coordination
+procedure](references/coordinate-release.md) to obtain component verdicts and
+return the integrated report. Use the remaining candidate procedure to perform
+one assigned component assessment. A component assessor uses the candidate and
+purpose received from the coordinator and reports any additional dependency
+back to it. The coordinator does not repeat the component reviews.
 
 For a branch-only request without an MR, use the explicitly requested source and
 project release target, verify both through live remote refs, and record the
@@ -166,8 +174,10 @@ with ours/theirs does not demonstrate preservation of either side's intent.
 
 ## 4. Verify the candidate, not just the branch
 
-Choose checks according to the delivery diff, risk, and project verification
-contract: affected tests, types/lint, critical user flows, and integration. Use
+Use the installed `review` for applicable independent directions and
+`verify-changes` for checks required by the project, on the exact candidate.
+Reuse matching review and verification evidence as described below. Choose checks
+according to the delivery diff, risk, and project verification contract. Use
 verified repository commands. Enforce applicable resource limits on the actual
 build workers; if a required limit cannot be enforced, stop that build and name
 the missing mechanism. Resolve an unspecified build resource policy before a
@@ -189,11 +199,10 @@ heavy local build rather than guessing a safe budget.
 - Accept actual review in MR discussions, chat, or confirmed manual checks.
   Formal approvals remain mandatory when project/server rules require them.
   Missing review is not successful review; unresolved substantive findings block readiness.
-- Inspect affected production CI and configuration. For a changed service,
-  migration or artifact boundary, apply the installed `review-compatibility`
-  dependency. Record the exact dependency revisions and whether the candidate can
-  operate with them at the intended release step. Include the applicable
-  transition order. Pre-merge readiness does not require an already completed
+- Inspect affected production CI and configuration. Report any dependencies,
+  migrations or artifact boundaries to the coordinator. The release coordinator
+  obtains the separate compatibility assessment and combines it with component
+  evidence. Pre-merge readiness does not require an already completed
   deployment of the candidate.
 
 ## 5. Bind the verdict to delivery

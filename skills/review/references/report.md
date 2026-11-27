@@ -9,9 +9,10 @@ the author's reasoning or other directions' findings.
 Use the project's report language. A direction's report contains:
 
 - **Scope** — direction, target/ref SHA, base, candidate and reviewed area.
-  Identify the upstream reviewer package used, or the fallback and its reason.
-- **Reviewer** — separate session identifier and runtime. Record model, reasoning
-  effort and elapsed time when observed. Mark unavailable metadata as unknown.
+  Identify the candidate mode and the brief or upstream package used.
+- **Reviewer** — independent or explicitly requested direct execution, session
+  identifier and runtime. Record model, reasoning effort and elapsed time when
+  observed. Mark unavailable metadata as unknown.
 - **Findings** — severity, location or reproducible evidence, trigger, expected and
   observed behavior, and impact. Identify baseline debt where it matters.
 - **Verification** — commands or actions you ran, conditions and outcomes.
@@ -24,9 +25,10 @@ Use the project's report language. A direction's report contains:
   was unverified and why.
 
 The consolidated report lists each direction with its applicability and reason.
-Record the completed independent result or the gap for each applicable direction.
+Record the completed independent result, the labeled direct result or the gap for
+each applicable direction. A direct pass leaves required independent review open.
 Distinguish a direction that timed out or lacked a reviewer from one outside
 scope. Preserve findings and verdicts by direction and any unresolved differences.
-If a project requires a separate integration report, identify its target and
-source SHAs, method, result tree and checks on that tree. Record any owner
-decision with the original finding and the exact candidate.
+For an integration candidate, identify the target and source SHAs, merge method,
+resulting tree and checks on that tree. Record any owner decision beside the
+original finding and exact candidate.

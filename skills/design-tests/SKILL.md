@@ -5,8 +5,8 @@ description: Choose meaningful regression coverage for a change, including unit,
 
 # Design tests around observable contracts
 
-Read the project's testing policy through AGENTS.md and inspect its actual test
-commands and discovery configuration. Name the failure a test should detect
+Read `docs/agents/testing.md` and the testing policy it links. Inspect the actual
+test commands and discovery configuration. Name the failure a test should detect
 before choosing a framework or writing assertions.
 
 - Use pure tests for business rules, calculations and non-trivial transformations.

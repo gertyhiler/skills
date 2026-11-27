@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "required": [
+    "docs/agents/workflows/verification.md#checks",
+    "docs/agents/workflows/worktrees.md"
+  ]
+}

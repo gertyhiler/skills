@@ -5,10 +5,11 @@ description: Investigate runtime incidents by correlating code paths, logs, metr
 
 # Investigate runtime
 
-The purpose is a supported explanation, not a guessed fix. Read the project's
-AGENTS.md and investigation/access runbooks. Identify the symptom, relevant IDs,
-environment, event window with timezone and requested output. Ask only for missing
-inputs that block the next step; code inspection can continue independently.
+Read applicable agent instructions and `docs/agents/workflows/investigation.md`.
+Identify the symptom, relevant IDs, environment, event window with timezone and
+requested output. Read the applicable sections of
+`docs/agents/workflows/access.md` before accessing external evidence. Name any
+missing input that blocks a source and continue independent code inspection.
 
 ## Evidence workflow
 
@@ -17,12 +18,12 @@ inputs that block the next step; code inspection can continue independently.
    deployed revision as distinct from the local checkout until verified.
 2. **Plan hypotheses.** State a small set of plausible explanations and the
    evidence that would confirm or reject each. Choose only relevant sources.
-3. **Read logs/metrics.** Use installed grafana-access if applicable, or the
-   project's documented equivalent. Match environment, datasource, service labels,
-   UTC window and identifiers. Narrow first; preserve limits and retention gaps.
-4. **Read database state.** Use installed postgresql-access or the project's
-   documented read-only adapter. Read schema from code first. Match database and
-   environment; select bounded relevant fields. A snapshot is not an event log.
+3. **Read logs/metrics.** Use the project's named read-only adapter. Match the
+   environment, datasource, service labels, UTC window and identifiers. Start with
+   a narrow query and record limits and retention gaps.
+4. **Read database state.** Use the project's named read-only adapter. Read the
+   schema in code first. Verify the database and environment, then select only the
+   relevant fields. A snapshot is not an event log.
 5. **Read API-visible state when needed.** Use only the authorized read endpoint
    from the runbook when permissions, enrichment or computed fields explain a
    discrepancy. Do not invent a privileged endpoint or bypass application rules.
@@ -33,10 +34,8 @@ inputs that block the next step; code inspection can continue independently.
    cause or remaining hypotheses, unavailable evidence, impact and the smallest
    next action. State what could falsify an uncertain explanation.
 
-No mandatory dependency on another skill or automatic agent fanout. If an access
-skill is unavailable, follow the project runbook; if no access contract exists,
-report that gap instead of improvising credentials or a new production client.
-The access skills only collect evidence; this procedure owns its interpretation.
+If the specified adapter or access contract is unavailable, report the affected
+evidence gap. Access skills collect evidence. This procedure owns interpretation.
 
 ## Local contract and scope
 

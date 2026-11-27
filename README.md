@@ -9,14 +9,14 @@ between repositories without carrying company infrastructure or private context.
 
 **The skill supplies the method. Your project supplies the operating contract.**
 Commands, branches, environments, access and approval rules belong in your
-repository's runbook, linked from `AGENTS.md`, or in direct project instructions.
+repository's workflow documents and applicable `AGENTS.md`.
 Installing a skill never grants permission to deploy or discard work.
 
 ## Pick a skill
 
 | Skill | When it helps |
 | --- | --- |
-| [setup-runbooks](skills/setup-runbooks/SKILL.md) | Configure or reconcile project runbooks: inspect, preview, confirm, then write. |
+| [setup-workflows](skills/setup-workflows/SKILL.md) | Audit installed skill contracts, then preview and reconcile the required project documents. |
 | [verify-changes](skills/verify-changes/SKILL.md) | Choose proportionate checks and tie evidence to the actual diff or candidate. |
 | [deliver-to](skills/deliver-to/SKILL.md) | Deliver into a named non-production environment without overwriting its history. |
 | [check-release](skills/check-release/SKILL.md) | Assess the actual integration candidate; distinguish readiness from deployment. |
@@ -25,8 +25,6 @@ Installing a skill never grants permission to deploy or discard work.
 | [debug](skills/debug/SKILL.md) | Run a project-native debug session with a temporary collector, reproduction pauses, confirmation and marked cleanup. |
 | [design-tests](skills/design-tests/SKILL.md) | Choose tests that protect observable behavior at the right level. |
 | [review](skills/review/SKILL.md) | Coordinate independent review of one candidate through the project's workflow. |
-| [review-spec](skills/review-spec/SKILL.md) | Trace implementation to approved requirements and domain rules. |
-| [review-code](skills/review-code/SKILL.md) | Check implementation, placement, regressions and affected consumers. |
 | [review-compatibility](skills/review-compatibility/SKILL.md) | Compare the candidate with the exact dependency revisions in the intended environment. |
 | [review-tests](skills/review-tests/SKILL.md) | Review the confidence a test suite actually provides. |
 | [review-design](skills/review-design/SKILL.md) | Compare a rendered interface with an approved design. |
@@ -73,9 +71,11 @@ resolve the project entry in `.agents/skills.registry.json` and open its install
 `SKILL.md`. A fresh dependency install uses `.agents/skills/code-review/SKILL.md`.
 
 The project workflow selects any additional review directions and supporting
-documents. Existing directions, including `review-code`, can be installed and
-invoked directly. To control updates to your selected packages, use an approved
+documents. Use `$review` to request Standards, Spec or implementation correctness
+individually, including on work in progress. To control package updates, use an approved
 source ref or explicitly adopt updates from a tracked ref with `skillsx update`.
+For a direct single-session pass, explicitly request direct execution and the
+direction. That result carries no independent-review credit.
 
 For a manual installation of a standalone skill, copy the entire selected
 `skills/<name>/` directory to your agent's configured location. Review any existing
@@ -84,40 +84,28 @@ copy before replacing it.
 Use `release-readiness` when the project already calls that entry point. Its
 manifest installs the compatible `check-release` revision and its dependencies.
 Install the listed dependencies explicitly when using an installer that does
-not resolve the manifest.
+not resolve the manifest. Relative dependency paths use the declaring skill's
+exact source revision.
 
 `clean-worktrees` retains explicit-only invocation in its Codex metadata. Its
 instructions require a cleanup request and scoped authorization in every runtime.
 
 ## Connect your project
 
-Use `setup-runbooks` when you want help configuring or reconciling these pointers
-and their project instructions. It inspects the repository and presents a concrete
-draft for confirmation before writing. Existing runbooks can also satisfy the
-contract directly; setup is not a prerequisite for using other skills.
+Use `$setup-workflows` to audit an existing SkillsX installation. It reads each
+installed skill's exact `agents/project-docs.json` contract from the canonical
+copy in the project registry. It previews concrete changes for approval and
+checks the result after reconciliation. A missing required document or heading
+blocks its dependent operation. The skill uses discovered project facts and does
+not infer branches, checks or approval from a template.
 
-Add pointers to the process documents you already maintain. Paths below are
-examples, not required filenames:
-
-```markdown
-## Project workflow runbooks
-
-- Review workflow: docs/workflows/review.md
-- Verification: docs/runbooks/verification.md
-- Environment delivery: docs/runbooks/delivery.md
-- Release readiness: docs/runbooks/release.md
-- Hosting access: docs/runbooks/hosting.md
-- Runtime debugging: docs/runbooks/debugging.md
-- Worktrees: docs/runbooks/worktrees.md
-- Testing: docs/testing.md
-- Architecture: docs/architecture.md
-```
-
-Link only documents that exist and that your selected skills need. A single
-runbook with sections is enough. See [the project contract](docs/project-contract.md)
-for the information each procedure needs. If a required input is missing, the
-agent should identify the gap and continue independent inspection rather than
-invent a branch, command or approval.
+`AGENTS.md` directs agents to active workflow documents in
+`docs/agents/workflows/`. `CONTRIBUTING.md` routes contributors to the human
+documents, including `docs/ARCHITECTURE.md`, `docs/TESTING.md` and
+`docs/CODING_STANDARDS.md` when needed. The corresponding agent documents link
+those authorities. Reuse Matt Pocock's issue tracker and domain paths when
+relevant. See the [project contract](docs/project-contract.md) for the manifest,
+exact locations and ownership model.
 
 ## How I use them
 

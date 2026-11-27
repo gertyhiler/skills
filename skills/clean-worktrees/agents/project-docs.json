@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "required": [
+    "docs/agents/workflows/worktrees.md",
+    "docs/agents/workflows/access.md#hosting"
+  ]
+}

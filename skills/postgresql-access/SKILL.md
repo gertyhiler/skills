@@ -5,10 +5,11 @@ description: Read PostgreSQL evidence using project-local env configuration and 
 
 # PostgreSQL access
 
-Use the consumer AGENTS.md/runbook to identify the database environment, schema
-source and access policy. Read [the access contract](references/access.md) before
-first use. Load `.agents/local/.env.agents` as data, never through shell source.
-Do not print env files, full DSNs, passwords or raw authentication errors.
+Read `docs/agents/workflows/access.md#postgresql` to identify the database
+environment, schema source and access policy. Read
+[the access contract](references/access.md) before first use.
+Load `.agents/local/.env.agents` as data. Keep env files, full DSNs, passwords and
+raw authentication errors out of output.
 
 ## Schema-first sequence
 

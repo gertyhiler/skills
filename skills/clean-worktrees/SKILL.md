@@ -6,10 +6,11 @@ description: Analyze all project worktrees, explain their contents and propose r
 # Worktree cleanup
 
 A cleanup request starts the complete analysis, not deletion. Read applicable
-AGENTS.md and the project worktree/hosting runbooks first. Resolve repository
+`AGENTS.md` and the declared [project documents](agents/project-docs.json).
+Resolve repository
 roots, worktree locations, release and environment targets, ownership, ignored-file
 policy and managed-worktree lifecycle. Never assume a branch name or directory.
-Skills supply decision criteria; the runbook supplies project commands and execution
+Skills supply decision criteria; the project workflows supply commands and execution
 order. Missing inputs block only dependent conclusions, not independent inspection.
 
 Delivery and review skills use the separate [operation-owned lifecycle](references/lifecycle.md).

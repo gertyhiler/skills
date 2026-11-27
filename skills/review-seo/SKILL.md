@@ -5,8 +5,8 @@ description: Review changes that affect discoverability, rendered metadata or in
 
 # Review discoverability
 
-1. Resolve affected public URLs and their intended indexing behavior from
-   approved requirements and the project's workflow.
+1. Read `docs/agents/workflows/review.md#seo` and the approved requirements.
+   Resolve affected public URLs and their intended indexing behavior.
 2. Compare observable responses and rendered metadata with that intent. Check
    affected status codes, redirects, canonical URLs, robots directives, sitemap
    entries and structured data. Derive expected values from the approved

@@ -5,9 +5,9 @@ description: Review whether changed behavior and documentation agree with their 
 
 # Review documentation
 
-1. Use the project workflow and documentation index to locate the canonical
-   sources for changed behavior, commands or decisions. Include existing documents
-   that may have become inaccurate even when they are outside the diff.
+1. Use `docs/agents/workflows/review.md#documentation` and its linked index to
+   identify canonical sources for changed behavior, commands or decisions. Include
+   affected documents outside the diff.
 2. Verify requirement claims against approved decisions and implementation
    claims against code or observed behavior. Check affected links, paths and
    commands at the authoritative source. Distinguish introduced staleness from

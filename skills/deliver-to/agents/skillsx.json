@@ -2,14 +2,13 @@
   "version": 1,
   "dependencies": [
     {
-      "url": "https://github.com/gertyhiler/skills.git",
-      "path": "skills/clean-worktrees",
-      "revision": "dafb400bdb05636ce1bd5865bc6e4442509ae56a"
+      "path": "skills/clean-worktrees"
     },
     {
-      "url": "https://github.com/gertyhiler/skills.git",
-      "path": "skills/review-compatibility",
-      "revision": "3221dce11e7588625826e34a70db2b9b80f80e27"
+      "path": "skills/review-compatibility"
+    },
+    {
+      "path": "skills/verify-changes"
     }
   ]
 }

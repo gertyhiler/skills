@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "required": [
+    "docs/agents/testing.md",
+    "docs/agents/workflows/verification.md#checks"
+  ]
+}

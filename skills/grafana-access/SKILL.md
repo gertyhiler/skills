@@ -5,11 +5,11 @@ description: Read Grafana Loki logs and Prometheus metrics with project-local cr
 
 # Grafana access
 
-Resolve the consumer project, environment, service labels and evidence policy from
-AGENTS.md and its runbook. Read [the access contract](references/access.md) before
-first use. Credentials belong in the consumer's ignored `.agents/local/.env.agents`;
-never print that file or source it in a shell. A token/password is not authorization
-to change infrastructure. This skill only reads data (login creates a session).
+Read `docs/agents/workflows/access.md#grafana` to resolve the consumer project,
+environment, service labels and evidence policy. Read
+[the access contract](references/access.md) before first use. Credentials belong
+in the consumer's ignored `.agents/local/.env.agents`. Load this file as data and
+keep its values out of output. This skill only reads data (login creates a session).
 
 ## Procedure
 

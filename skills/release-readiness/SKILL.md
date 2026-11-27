@@ -5,7 +5,9 @@ description: Assess production release readiness for the exact integration candi
 
 # Release readiness
 
-Resolve the installed `check-release` dependency through the consumer registry
-or catalog and follow its `SKILL.md` directly. Keep the requesting project's
+Resolve the declared `check-release` package through the consumer registry
+at the same source and commit as this entry point. Follow that exact
+`SKILL.md`. For a manual installation, use both packages from the same verified
+commit. Keep the requesting project's
 release workflow, verification requirements and evidence authority in scope.
 Report a missing dependency if it cannot be resolved.

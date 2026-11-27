@@ -5,7 +5,9 @@ description: Evaluate whether a pinned change candidate can operate with the ser
 
 # Review compatibility at the delivery boundary
 
-1. Read the consumer project's release or environment delivery workflow. Identify
+1. Read applicable `AGENTS.md` and the [project compatibility
+   contract](agents/project-docs.json). Read the compatibility section of
+   `docs/agents/workflows/delivery.md` for the target environment. Identify
    the exact candidate and the changed behavior that crosses a service, data or
    artifact boundary. The project identifies authoritative records, required
    evidence, and permitted checks. Work read-only during assessment.

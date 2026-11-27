@@ -5,14 +5,19 @@ description: Review whether tests protect meaningful behavior at the right level
 
 # Review the evidence tests provide
 
-Read the project's testing policy and inspect the changed behavior, its direct
-consumers, relevant tests and runner configuration for the requested scope. Keep
-source, tests and baselines unchanged throughout the review.
+Read `docs/agents/testing.md` and the policy it links. Use
+`docs/agents/workflows/verification.md#checks` when identifying the required
+runner or CI job. Inspect the changed behavior, its direct consumers, relevant
+tests and runner configuration. Keep source, tests and baselines unchanged.
 
 Map the material behavior changes to assertions in the existing tests, including
 relevant suites outside the diff. Look for gaps in critical outcomes, boundary
 and rejection cases, and recovery from errors. Consider partial failure and the
 order of asynchronous or concurrent operations when they affect the contract.
+For an order-sensitive change, name the required sequence and a material
+reordering. Identify the assertion on the visible result, persisted state or
+external boundary that would fail under that reordering. A mock call's order is
+evidence only when the boundary contract requires that order.
 
 For each relied-upon test ask:
 

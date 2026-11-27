@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "required": [
+    "docs/agents/workflows/delivery.md#production",
+    "docs/agents/workflows/review.md",
+    "docs/agents/workflows/verification.md#checks",
+    "docs/agents/workflows/access.md#hosting",
+    "docs/agents/workflows/worktrees.md"
+  ]
+}

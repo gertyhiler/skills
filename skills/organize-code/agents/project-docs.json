@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "required": [
+    "docs/agents/architecture.md",
+    "docs/agents/coding-standards.md",
+    "docs/agents/testing.md",
+    "CONTRIBUTING.md"
+  ]
+}

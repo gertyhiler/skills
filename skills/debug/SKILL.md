@@ -13,8 +13,9 @@ what instrumentation would require; do not alter the project without authorizati
 An explicit request to run this debug mode authorizes its scoped temporary setup.
 Follow the user's scope for fixes and retain the interaction gates below.
 
-Read AGENTS.md and the project's launch/debugging runbook. Identify the actual
-stack, entrypoints, development commands, evidence location and current changes.
+Read applicable agent instructions and `docs/agents/workflows/debugging.md`.
+Identify the actual stack, entrypoints, development commands, evidence location
+and current changes. Resolve those inputs before launching or editing anything.
 The collector and emitters are written in the **consumer project's stack**. Python
 is the runtime of this collection's shipped helpers, not a requirement to insert
 Python into a TypeScript, Go or other application.

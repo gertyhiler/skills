@@ -5,8 +5,8 @@ description: Review affected interface semantics, keyboard interactions, focus, 
 
 # Review accessibility
 
-1. Identify affected user actions and states. Follow the project's accessibility
-   rules and use the applicable static and browser evidence.
+1. Read `docs/agents/workflows/review.md#accessibility`. Identify affected user
+   actions and states, and use the linked rules and browser evidence.
 2. Inspect accessible names, roles, states, relevant visual cues and error
    feedback. Exercise keyboard traversal and activation, and check focus
    placement and restoration on changed transitions. Check the relevant rendered

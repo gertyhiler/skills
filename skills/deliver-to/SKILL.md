@@ -6,14 +6,14 @@ description: Deliver a branch or selected commits to a non-production environmen
 # Deliver to a non-production environment
 
 Use `$deliver-to stage` (or another project-defined environment) to name the
-target. Resolve that name through the project runbook; it is not automatically a
-Git branch or deployment command.
+target. Resolve that name through the non-production section of the project's
+delivery workflow.
 
 ## Resolve the project contract
 
-Read applicable `AGENTS.md` instructions and follow the **Environment delivery**,
-**Verification**, and hosting-access runbook pointers (for example, **GitLab access**). Paths are project-defined;
-direct project instructions or explicit user inputs can supply the same contract.
+Read applicable `AGENTS.md` instructions and the declared [project
+documents](agents/project-docs.json). Read the non-production section of
+`docs/agents/workflows/delivery.md` and follow its exact source links.
 Obtain:
 
 - environment names and their target refs/remotes;

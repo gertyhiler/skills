@@ -11,9 +11,10 @@ and return the final evidence report; no separate plan-approval pause is require
 
 ## Resolve the project contract
 
-Read applicable `AGENTS.md` instructions and follow the **Verification** runbook
-pointer. The path is project-defined. Direct project instructions or explicit
-user inputs can supply the same contract. Obtain required checks, authoritative
+Read applicable `AGENTS.md` instructions and the declared [project
+documents](agents/project-docs.json). Follow the checks section of
+`docs/agents/workflows/verification.md` and the exact sources it names.
+Obtain required checks, authoritative
 command/configuration sources, test-writing conventions when relevant, and build
 resource/worktree policies. Validate commands against the current repository.
 
