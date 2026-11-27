@@ -101,8 +101,10 @@ location. State reproduction/confirmation ownership and cleanup.
 
 - `docs/agents/issue-tracker.md` records the tracker, issue/spec workflow, read
   and write authority, and applicable publication steps.
-- `docs/agents/domain.md` points at the existing `CONTEXT.md` or
-  `CONTEXT-MAP.md`, appropriate ADRs, and relevant domain documents.
+- `docs/agents/domain.md` points at the project's canonical glossary or glossary
+  map, appropriate ADRs, and relevant domain documents. Reuse a documented
+  canonical path. When scaffolding domain documentation under Matt's convention,
+  use `GLOSSARY.md` for one context and `GLOSSARY-MAP.md` for multiple contexts.
 - `docs/agents/triage-labels.md` records the project's labels or equivalent
   roles when a selected workflow requires them.
 
